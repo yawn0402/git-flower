@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.flowerspringboot.mapper.OrderstableMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.flowerspringboot.pojo.Orderstable">
+            <id property="ordid" column="ordid" jdbcType="INTEGER"/>
+            <result property="bid" column="bid" jdbcType="INTEGER"/>
+            <result property="fid" column="fid" jdbcType="INTEGER"/>
+            <result property="ordnum" column="ordnum" jdbcType="INTEGER"/>
+            <result property="ordprice" column="ordprice" jdbcType="DOUBLE"/>
+            <result property="ctime" column="ctime" jdbcType="TIMESTAMP"/>
+            <result property="ordstate" column="ordstate" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ordid,bid,fid,
+        ordnum,ordprice,ctime,
+        ordstate
+    </sql>
+</mapper>

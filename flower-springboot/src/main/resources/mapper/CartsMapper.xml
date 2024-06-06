@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.flowerspringboot.mapper.CartsMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.flowerspringboot.pojo.Carts">
+            <id property="carid" column="carid" jdbcType="INTEGER"/>
+            <result property="bid" column="bid" jdbcType="INTEGER"/>
+            <result property="fid" column="fid" jdbcType="INTEGER"/>
+            <result property="carnum" column="carnum" jdbcType="INTEGER"/>
+            <result property="carprice" column="carprice" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        carid,bid,fid,
+        carnum,carprice
+    </sql>
+</mapper>

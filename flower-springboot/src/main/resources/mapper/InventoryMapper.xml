@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.flowerspringboot.mapper.InventoryMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.flowerspringboot.pojo.Inventory">
+            <id property="iid" column="iid" jdbcType="INTEGER"/>
+            <result property="purnum" column="purnum" jdbcType="INTEGER"/>
+            <result property="purprice" column="purprice" jdbcType="DOUBLE"/>
+            <result property="ordnum" column="ordnum" jdbcType="INTEGER"/>
+            <result property="ordprice" column="ordprice" jdbcType="DOUBLE"/>
+            <result property="reoprice" column="reoprice" jdbcType="DOUBLE"/>
+            <result property="profit" column="profit" jdbcType="DOUBLE"/>
+            <result property="itime" column="itime" jdbcType="TIMESTAMP"/>
+            <result property="realnum" column="realnum" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        iid,purnum,purprice,
+        ordnum,ordprice,reoprice,
+        profit,itime,realnum
+    </sql>
+</mapper>

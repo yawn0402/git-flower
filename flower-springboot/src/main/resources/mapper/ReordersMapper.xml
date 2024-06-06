@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.flowerspringboot.mapper.ReordersMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.flowerspringboot.pojo.Reorders">
+            <id property="rid" column="rid" jdbcType="INTEGER"/>
+            <result property="ordid" column="ordid" jdbcType="INTEGER"/>
+            <result property="rprice" column="rprice" jdbcType="DOUBLE"/>
+            <result property="rstate" column="rstate" jdbcType="INTEGER"/>
+            <result property="reason" column="reason" jdbcType="VARCHAR"/>
+            <result property="rtime" column="rtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        rid,ordid,rprice,
+        rstate,reason,rtime
+    </sql>
+</mapper>

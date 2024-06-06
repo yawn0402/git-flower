@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.flowerspringboot.mapper.CommentstableMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.flowerspringboot.pojo.Commentstable">
+            <id property="comid" column="comid" jdbcType="INTEGER"/>
+            <result property="bid" column="bid" jdbcType="INTEGER"/>
+            <result property="fid" column="fid" jdbcType="INTEGER"/>
+            <result property="score" column="score" jdbcType="INTEGER"/>
+            <result property="comments" column="comments" jdbcType="VARCHAR"/>
+            <result property="comtime" column="comtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        comid,bid,fid,
+        score,comments,comtime
+    </sql>
+</mapper>
