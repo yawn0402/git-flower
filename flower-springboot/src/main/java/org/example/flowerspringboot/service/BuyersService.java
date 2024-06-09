@@ -16,4 +16,10 @@ public interface BuyersService extends IService<Buyers> {
     Result login(String buyername, String password);
 
     Result<Buyers> buyerInfo();
+
+    Result rePwd(String newPwd);
+
+    Result reBaseInfo(Buyers buyers);
+
+    Result<String> updataavatar(String avatarUrl);
 }

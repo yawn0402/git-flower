@@ -10,6 +10,10 @@ import inventory from'@/views/inventory.vue'
 import flowerDetail from"@/views/flowerManage/flowerDetail.vue"
 import purchase from'@/views/pruchase.vue'
 import LoginSignup from'@/views/LoginSignup.vue'
+import baseInfo from"@/views/buyerManage/baseInfo.vue"
+import reAvatar from"@/views/buyerManage/reAvatar.vue"
+import rePwd from"@/views/buyerManage/rePwd.vue"
+
 
 const routes = [
     {
@@ -24,6 +28,18 @@ const routes = [
         component:Layout,
         redirect: '/showFlower',
         children: [
+            {
+                path:'/buyerManage/rePwd',
+                component:rePwd
+            },
+            {
+                path:'/buyerManage/reAvatar',
+                component:reAvatar
+            },
+            {
+                path:'/buyerManage/baseInfo',
+                component:baseInfo
+            },
             {
                 path: '/showFlower',
                 component: showFlower,

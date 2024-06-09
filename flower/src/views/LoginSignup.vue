@@ -91,14 +91,15 @@ const buyerInfoData = async () => {
     {
       bid: result.data.bid,
       bname: result.data.bname,
-      bsex: result.data.sex ? result.data.sex : "未知",
+      bsex: result.data.bsex ? result.data.bsex : "暂无",
       bavatar: result.data.bavatar,
       baddress: result.data.baddress ? result.data.baddress : "暂无",
+      btele: result.data.btele?result.data.btele:"暂无",
       isSeller: result.data.bid === 1 ? true : false
     })
   buyerStore.removeuBuyerInfo()
   buyerStore.setBuyerInfo(newInfo.value)
-  console.log("buyerStore.buyerInfo1", buyerStore.buyerInfo)
+  // console.log("buyerStore.buyerInfo1", buyerStore.buyerInfo)
   return result.data
 }
 

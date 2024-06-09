@@ -31,6 +31,7 @@ export const useBuyerStore=defineStore('user',
        	bsex:'',
         bavatar:'',
         baddress:'',
+        btele:'',
         isSeller:false
         })
      
@@ -47,8 +48,12 @@ export const useBuyerStore=defineStore('user',
         const setBuyerInfo=(newInfo)=>{
             buyerInfo.value=newInfo
         }
+
+        const setAvatar=(newAvatar)=>{
+            buyerInfo.value.bavatar=newAvatar
+        }
         return{
-            buyerInfo,removeuBuyerInfo,setBuyerInfo
+            buyerInfo,removeuBuyerInfo,setBuyerInfo,setAvatar
         }
     },
     {

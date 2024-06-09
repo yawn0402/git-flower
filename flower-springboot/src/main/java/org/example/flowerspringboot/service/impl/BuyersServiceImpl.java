@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -60,6 +61,40 @@ public class BuyersServiceImpl extends ServiceImpl<BuyersMapper, Buyers>
         Buyers buyers=buyersMapper.selectOne(lambdaQueryWrapper);
         buyers.setBpwd("");
         return Result.success(buyers);
+    }
+
+    @Override
+    public Result rePwd(String newPwd) {
+    LambdaQueryWrapper<Buyers>lambdaQueryWrapper=new LambdaQueryWrapper<>();
+    lambdaQueryWrapper.eq(Buyers::getBid,ThreadLocalUtil.get());
+    Buyers buyers=new Buyers();
+    buyers.setBpwd(newPwd);
+        System.out.println(newPwd);
+        int fet=ThreadLocalUtil.get();
+        System.out.println(fet);
+        buyersMapper.update(buyers,lambdaQueryWrapper);
+        return Result.success();
+    }
+
+    @Override
+    public Result reBaseInfo(Buyers buyers) {
+        LambdaQueryWrapper<Buyers>lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Buyers::getBid,ThreadLocalUtil.get());
+        System.out.println(buyers.getBaddress()+buyers.getBsex());
+        buyersMapper.update(buyers,lambdaQueryWrapper);
+        return Result.success();
+    }
+
+    @Override
+    public Result<String> updataavatar(String avatarUrl) {
+        Buyers buyers=new Buyers();
+        buyers.setBavatar(avatarUrl);
+        LambdaQueryWrapper <Buyers>lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Buyers::getBid,ThreadLocalUtil.get());
+
+        buyersMapper.update(buyers,lambdaQueryWrapper);
+        return Result.success();
+
     }
 }
 

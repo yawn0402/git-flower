@@ -22,3 +22,21 @@ export const buyerLoginService=(registerData)=>{
 export const buyerInfoService=(registerData)=>{
     return request.get("/buyer/buyerInfo")
 }
+
+export const buyerRePwdService=(newPwd)=>{
+    const params=new URLSearchParams;
+    params.append('newPwd',newPwd)
+    return request.put("/buyer/rePwd",params)
+}
+
+//修改头像
+export const userAvatarUpdateService = (avatarUrl)=>{
+    const params = new URLSearchParams();
+    params.append('avatarUrl',avatarUrl)
+    return request.patch('/buyer/avatar',params)
+}
+
+export const buyerReBaseInfoService=(buyerInfo)=>{
+    
+    return request.put("/buyer/reBaseInfo",buyerInfo)
+}
