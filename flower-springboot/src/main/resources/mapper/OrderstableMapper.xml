@@ -19,4 +19,15 @@
         ordnum,ordprice,ctime,
         ordstate
     </sql>
+    <select id="myList" resultType="org.example.flowerspringboot.pojo.Orderstable">
+        select * from orderstable
+        <where>
+            <if test="bid!=null">
+                bid=#{bid}
+            </if>
+            <if test="state!=null">
+                and ordstate=#{state}
+            </if>
+        </where>
+    </select>
 </mapper>

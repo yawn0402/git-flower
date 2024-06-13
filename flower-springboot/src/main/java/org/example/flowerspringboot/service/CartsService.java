@@ -2,6 +2,8 @@ package org.example.flowerspringboot.service;
 
 import org.example.flowerspringboot.pojo.Carts;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.pojo.PageBean;
+import org.example.flowerspringboot.utils.Result;
 
 /**
 * @author 陈涛
@@ -10,4 +12,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CartsService extends IService<Carts> {
 
+    Result<String> addCart(Carts carts);
+
+    Result<String> addOrder(Integer carid, Integer fid, Integer ordnum, Double ordprice);
+
+    Result<PageBean<Carts>> cartList(Integer pageNum);
+
+    Result<String> cartDelete(Integer carid);
 }

@@ -3,6 +3,8 @@ package org.example.flowerspringboot.mapper;
 import org.example.flowerspringboot.pojo.Orderstable;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
 * @author 陈涛
 * @description 针对表【orderstable】的数据库操作Mapper
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface OrderstableMapper extends BaseMapper<Orderstable> {
 
+    List<Orderstable> myList(Integer bid, Integer state);
 }
 
 

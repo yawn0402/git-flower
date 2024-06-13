@@ -1,7 +1,13 @@
 package org.example.flowerspringboot.service;
 
+import org.example.flowerspringboot.pojo.Commentstable;
+import org.example.flowerspringboot.pojo.FlowerList;
 import org.example.flowerspringboot.pojo.Flowers;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.pojo.Pictures;
+import org.example.flowerspringboot.utils.Result;
+
+import java.util.List;
 
 /**
 * @author 陈涛
@@ -10,4 +16,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface FlowersService extends IService<Flowers> {
 
+    Result<FlowerList> getFlowerList();
+
+    Result<Flowers> detail(String fid);
+
+    Result<List<Pictures>> pics(Integer fid);
+
+    Result <List<Commentstable>> comment(Integer fid);
+
+    Result<FlowerList> searchFlower(String toSearch);
 }

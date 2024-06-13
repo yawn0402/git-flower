@@ -4,6 +4,8 @@ import org.example.flowerspringboot.pojo.Buyers;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.example.flowerspringboot.utils.Result;
 
+import java.util.List;
+
 /**
 * @author 陈涛
 * @description 针对表【buyers】的数据库操作Service
@@ -22,4 +24,6 @@ public interface BuyersService extends IService<Buyers> {
     Result reBaseInfo(Buyers buyers);
 
     Result<String> updataavatar(String avatarUrl);
+
+    Result<List<Buyers>> buyerList();
 }

@@ -64,20 +64,16 @@ export const useBuyerStore=defineStore('user',
 
 export const useFlowerStore=defineStore('flower',
     ()=>{
-        const flowerInfo=ref({
-            flowerId:'',
-            flowerName:'',
-            introduction:'',
-            picURL:''
-        })
-
+      
         const selectedFlowerId=ref('')
         const setSelectedFlowerId=(newSelectedFlowerId)=>{
             selectedFlowerId.value=newSelectedFlowerId
         }
-        
+        const removeSelectedFlowerId=()=>{
+            selectedFlowerId.value=''
+        }
         return{
-            flowerInfo,selectedFlowerId,setSelectedFlowerId
+            selectedFlowerId,setSelectedFlowerId,removeSelectedFlowerId
         }
     },
     {

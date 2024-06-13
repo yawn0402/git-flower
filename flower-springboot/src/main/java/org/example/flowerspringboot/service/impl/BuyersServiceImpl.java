@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -95,6 +96,12 @@ public class BuyersServiceImpl extends ServiceImpl<BuyersMapper, Buyers>
         buyersMapper.update(buyers,lambdaQueryWrapper);
         return Result.success();
 
+    }
+
+    @Override
+    public Result<List<Buyers>> buyerList() {
+        List<Buyers>buyersList=buyersMapper.selectList(null);
+        return Result.success(buyersList);
     }
 }
 

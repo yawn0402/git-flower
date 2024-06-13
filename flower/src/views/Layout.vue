@@ -4,7 +4,7 @@
         Management,Promotion,UserFilled,User,Crop,
         EditPen,SwitchButton,CaretBottom,House,
         ShoppingCart,Memo,List,Star,DataAnalysis,
-        Van,Collection
+        Pointer,Collection
     } from '@element-plus/icons-vue'
    
     import {useBuyerStore,useTokenStore} from'@/stores/index.js'
@@ -32,7 +32,7 @@ const logout=()=>{
             .then(async () => {
                 tokenStore.removeToken()
                 buyerStore.removeuBuyerInfo()
-               
+               router.push("/showFlower")
             })
             .catch(() => {
                 //用户点击了取消
@@ -54,8 +54,10 @@ const dialogVisible=ref(false)
         <el-header class="el-header">
             <div style="display: flex;align-items: center;">
                 <img src="@/assets/logo2.png" alt="">
+                <!-- <img src="https://big-event-ct.oss-cn-beijing.aliyuncs.com/ae9369e9-e773-4f07-a1ed-1973ac0d25f3.png" alt=""> -->
                 <span style="margin-left: 10px; color: #f89898;">
                     翠微阁
+                     <!-- MyGo!!!!! -->
                 </span>
 
             </div>
@@ -99,8 +101,8 @@ const dialogVisible=ref(false)
                 </el-sub-menu>
                 <el-menu-item index="/purchase" v-show="buyerStore.buyerInfo.isSeller">
                     <el-icon>
-                        <Van />
-                    </el-icon>进货</el-menu-item>
+                        <Pointer />
+                    </el-icon>花卉管理</el-menu-item>
                 <el-menu-item index="/inventory" v-show="buyerStore.buyerInfo.isSeller"><el-icon>
                         <DataAnalysis />
                     </el-icon>盘点</el-menu-item>
@@ -111,12 +113,13 @@ const dialogVisible=ref(false)
                 </el-menu-item>
             </el-menu>
 
-            <!-- <span v-if="tokenStore.token==''">
+            
+            <span v-if="tokenStore.token==''">
                 <el-link style="color: plum;" @click="router.push('/login');">
                 去登陆</el-link>
-            </span> -->
-
-            <el-dropdown placement="bottom-end" >
+            </span>
+       
+            <el-dropdown placement="bottom-end" v-else>
                 <span class="el-dropdown__box">
                     <el-avatar :src="buyerStore.buyerInfo.bavatar" />
                     {{ buyerStore.buyerInfo.bname }}

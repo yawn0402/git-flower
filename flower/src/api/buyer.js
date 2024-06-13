@@ -40,3 +40,7 @@ export const buyerReBaseInfoService=(buyerInfo)=>{
     
     return request.put("/buyer/reBaseInfo",buyerInfo)
 }
+export const buyerListService=()=>{
+    
+    return request.get("/buyer/list")
+}

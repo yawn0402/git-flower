@@ -23,5 +23,7 @@ public class Flowers implements Serializable {
 
     private String fintroduction;
 
+    private String fcover;
+
     private static final long serialVersionUID = 1L;
 }

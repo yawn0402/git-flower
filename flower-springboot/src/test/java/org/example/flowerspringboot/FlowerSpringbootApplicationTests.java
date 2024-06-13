@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -23,10 +25,11 @@ class FlowerSpringbootApplicationTests {
     private BuyersMapper buyersMapper;
     @Autowired
     private FlowersMapper flowersMapper;
+
     @Test
     void contextLoads() {
 //     List<Buyers>buyers=buyersMapper.selectList(null);
-       List<Flowers>flowersList=flowersMapper.selectList(null);
+        List<Flowers> flowersList = flowersMapper.selectList(null);
 
         try {
             System.out.println(dataSource.getConnection());
@@ -38,8 +41,8 @@ class FlowerSpringbootApplicationTests {
 
 
     @Test
-    void testToken(){
-        JwtHelper jwtHelper=new JwtHelper();
+    void testToken() {
+        JwtHelper jwtHelper = new JwtHelper();
         System.out.println(jwtHelper.createToken(2));
     }
 }

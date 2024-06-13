@@ -2,6 +2,8 @@ package org.example.flowerspringboot.service;
 
 import org.example.flowerspringboot.pojo.Commentstable;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.pojo.PageBean;
+import org.example.flowerspringboot.utils.Result;
 
 /**
 * @author 陈涛
@@ -10,4 +12,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CommentstableService extends IService<Commentstable> {
 
+    Result<PageBean<Commentstable>> getComment(Integer pageNum,Integer bid);
+
+    Result<String> addComment(Commentstable commentstable);
+
+    Result<String> commentDelete(Integer comid);
 }

@@ -1,7 +1,10 @@
 package org.example.flowerspringboot.service;
 
+import org.example.flowerspringboot.pojo.Carts;
 import org.example.flowerspringboot.pojo.Orderstable;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.pojo.PageBean;
+import org.example.flowerspringboot.utils.Result;
 
 /**
 * @author 陈涛
@@ -10,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface OrderstableService extends IService<Orderstable> {
 
+    Result<PageBean<Orderstable>> orderList(Integer pageNum,Integer bid, Integer state);
+
+    Result<String> changeOrdstate(Integer ordid, Integer ordstate);
 }

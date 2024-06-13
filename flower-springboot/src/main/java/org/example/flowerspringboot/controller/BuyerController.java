@@ -4,10 +4,11 @@ import jakarta.validation.constraints.Pattern;
 import org.example.flowerspringboot.pojo.Buyers;
 import org.example.flowerspringboot.service.BuyersService;
 import org.example.flowerspringboot.utils.Result;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("buyer")
@@ -50,5 +51,8 @@ public class BuyerController {
         Result<String> result=buyersService.updataavatar(avatarUrl);
         return result;
     }
-
+    @GetMapping("list")
+    public Result<List<Buyers>>buyerList(){
+        return buyersService.buyerList();
+    }
 }
