@@ -1,7 +1,10 @@
 package org.example.flowerspringboot.service;
 
+import org.example.flowerspringboot.pojo.Orderstable;
+import org.example.flowerspringboot.pojo.PageBean;
 import org.example.flowerspringboot.pojo.Reorders;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.utils.Result;
 
 /**
 * @author 陈涛
@@ -10,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ReordersService extends IService<Reorders> {
 
+
+    Result<String> addReorder(Reorders reorders);
+
+    Result<PageBean<Reorders>> reorderList(Integer pageNum, Integer bid, Integer rstate);
+
+    Result<String> changeReorderState(Integer rid, Integer rstate);
 }

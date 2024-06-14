@@ -1,7 +1,10 @@
 package org.example.flowerspringboot.mapper;
 
+import org.example.flowerspringboot.pojo.Orderstable;
 import org.example.flowerspringboot.pojo.Reorders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author 陈涛
@@ -10,7 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity org.example.flowerspringboot.pojo.Reorders
 */
 public interface ReordersMapper extends BaseMapper<Reorders> {
-
+    List<Reorders> myList( Integer rstate);
 }
 
 

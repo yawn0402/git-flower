@@ -46,7 +46,7 @@ const flowerList = ref('')
 const selectedState = ref('')
 import { buyerListService } from "@/api/buyer.js"
 import { flowerListService } from "@/api/flower.js"
-import { orderListService, changeOrdstateService } from "@/api/trade.js"
+import { orderListService, changeOrdstateService,addReorderService } from "@/api/trade.js"
 import { useBuyerStore } from '@/stores/index.js'
 import { ElMessage } from 'element-plus';
 
@@ -109,6 +109,7 @@ const changeOrdstate = async (ordid, ordstate) => {
 
 import { commentAddService } from "@/api/comment.js"
 const dialogVisible = ref(false)
+const reOrderVisible = ref(false)
 const commentstable = ref({
   bid: '',
   fid: '',
@@ -138,6 +139,27 @@ const commentAdd = async () => {
     getOrderList()
     ElMessage.success("操作成功")
 
+  }
+}
+const reorderModel = ref(
+  {
+    ordid:'',
+    rprice:1,
+    reason:''
+  }
+)
+
+const addReorder = async () => {
+  if(reorderModel.value.rprice==''||reorderModel.value.reason==''){
+    ElMessage.error("不能为空哦")
+  }else{
+   const r1=  await addReorderService(reorderModel.value)
+
+    reorderModel.value.rprice = 1
+    reorderModel.value.reason = ''
+    const r2= await changeOrdstateService(reorderModel.value.ordid,3)
+    ElMessage.success("申请售后成功")
+    getOrderList()
   }
 }
 </script>
@@ -176,7 +198,8 @@ const commentAdd = async () => {
               @click="changeOrdstate(row.ordid, 2);">签收</el-button>
             <el-button v-if="row.ordstate == '已签收'" circle plain type="warning"
               @click="dialogVisible = true; commentstable.fname = row.fname">评价</el-button>
-            <el-button v-if="row.ordstate !== '已售后'" circle plain type="danger">售后</el-button>
+            <el-button v-if="row.ordstate !== '已售后'" circle plain type="danger"
+            @click="reOrderVisible=true;reorderModel.ordid=row.ordid">售后</el-button>
             <el-button v-else style="background-color: darkgrey"  plain>已售后</el-button>
 
           </div>
@@ -200,16 +223,13 @@ const commentAdd = async () => {
       style="margin-top: 20px; justify-content: center" />
 
   </el-card>
-
   <el-dialog title="评价" v-model="dialogVisible" width="30%">
     <div class="dialog">
-
       <div class="demo-rate-block">
         <span class="demonstration"></span>
         <label>评分:</label>
         <el-rate v-model="commentstable.score" :colors="colors" />
       </div>
-
     </div>
     <div class="dialog">
       <span>
@@ -222,10 +242,46 @@ const commentAdd = async () => {
         <el-button type="primary" @click="commentAdd(); dialogVisible = false; console.log(commentstable)">确定</el-button>
         <el-button type="warning"
           @click="dialogVisible = false; commentstable.score = ''; commentstable.comments = ''">取消</el-button>
-
       </span>
     </template>
   </el-dialog>
+
+
+
+  <el-dialog title="售后" v-model="reOrderVisible" width="30%">
+    <el-row>
+      <el-col :span="6" :offset="3">
+      <span>
+        <label>售后金额:</label>
+      </span>
+    </el-col>
+    <el-col :span="13">
+      <el-input-number size="small" v-model="reorderModel.rprice" :min="1"  />
+    </el-col>
+    </el-row>
+    
+    <el-row>
+      <el-col :span="6" :offset="3">
+      <span>
+        <label>售后原因:</label>
+      </span>
+    </el-col>
+    <el-col :span="13">
+      <textarea type="text" v-model="reorderModel.reason">
+      </textarea>
+    </el-col>
+    </el-row>
+    
+
+    <template #footer>
+      <span class="dialog">
+        <el-button type="primary" @click="addReorder(); reOrderVisible = false">确定</el-button>
+        <el-button type="warning"
+          @click="reOrderVisible = false;reorderModel.rprice = 1; reorderModel.reason=''">取消</el-button>
+      </span>
+    </template>
+  </el-dialog>
+
 
 </template>
 
@@ -246,10 +302,12 @@ const commentAdd = async () => {
   }
 
 }
-
+.el-row {
+  margin-bottom: 20px;
+}
 .dialog {
   display: flex;
-  margin: 15px;
+  
   justify-content: center;
 }
 </style>

@@ -45,19 +45,41 @@ const getCartList=async()=>{
 getCartList()
 
   import{addOrderService,cartDeleteService}from "@/api/trade.js"
-  import { ElMessage } from 'element-plus';
+  import { ElMessage,ElMessageBox } from 'element-plus';
   const buyit=async(carid)=>{
-    console.log(carid)
+    // console.log(carid)
     const result= await addOrderService(carid,'','','')
     getCartList()
     ElMessage.success("购买成功")
   }
 
   const deleteCart=async(carid)=>{
-    console.log(carid)
+
+    ElMessageBox.confirm(
+            '你确认退出删除码？',
+            '温馨提示',
+            {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'warning',
+            }
+        )
+            .then(async () => {
+              console.log(carid)
     const result= await cartDeleteService(carid)
     getCartList()
     ElMessage.success("删除成功")
+            })
+            .catch(() => {
+                //用户点击了取消
+                ElMessage({
+                    type: 'info',
+                    message: '取消删除',
+                })
+            })
+
+
+    
   }
   const selectedCarid=ref('')
 </script>

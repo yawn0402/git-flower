@@ -17,4 +17,12 @@
         rid,ordid,rprice,
         rstate,reason,rtime
     </sql>
+    <select id="myList" resultType="org.example.flowerspringboot.pojo.Reorders">
+        select * from reorders
+        <where>
+            <if test="rstate!=null">
+                and rstate=#{rstate}
+            </if>
+        </where>
+    </select>
 </mapper>

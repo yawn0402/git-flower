@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import org.example.flowerspringboot.pojo.Carts;
 import org.example.flowerspringboot.pojo.Orderstable;
 import org.example.flowerspringboot.pojo.PageBean;
+import org.example.flowerspringboot.pojo.Reorders;
 import org.example.flowerspringboot.service.CartsService;
 import org.example.flowerspringboot.service.OrderstableService;
 import org.example.flowerspringboot.service.ReordersService;
@@ -55,4 +56,18 @@ public class TradeController {
         return orderstableService.changeOrdstate(ordid,ordstate);
     }
 
+    @PostMapping("addReorder")
+    public Result<String>addReorder( @RequestBody @NotNull Reorders reorders){
+        return  reordersService.addReorder(reorders);
+    }
+
+    @GetMapping("reorderList")
+    public Result<PageBean<Reorders>>reorderList( @NotNull Integer pageNum , Integer bid, Integer rstate){
+        return reordersService.reorderList(pageNum,bid, rstate);
+    }
+
+    @PutMapping("changeReorderState")
+    public  Result<String>changeReorderState(@NotNull Integer rid,@NotNull Integer rstate){
+        return reordersService.changeReorderState(rid,rstate);
+    }
 }

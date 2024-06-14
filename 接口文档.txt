@@ -719,19 +719,19 @@ https://big-event-gwd.oss-cn-beijing.aliyuncs.com/9bf1cf5b-1420-4c1b-91ad-e0f463
 
 ### 3.6changeOrdstate
 
-#### 3.5.1 基本信息
+#### 3.6.1 基本信息
 
 > 请求路径：/trade/changeOrdstate
 >
 > 请求方式：put
 
-#### 3.2.2 请求参数
+#### 3.6.2 请求参数
 
 | ordid    | Integer | 不空 |
 | -------- | ------- | ---- |
 | ordstate | Integer | 不空 |
 
-#### 3.2.3 响应数据
+#### 3.6.3 响应数据
 
 响应数据类型：application/json
 
@@ -749,7 +749,102 @@ https://big-event-gwd.oss-cn-beijing.aliyuncs.com/9bf1cf5b-1420-4c1b-91ad-e0f463
 }
 ```
 
+### 3.7addReorder
 
+#### 3.7.1 基本信息
+
+> 请求路径：/trade/addRetable
+>
+> 请求方式：post
+
+#### 3.7.2 请求参数
+
+```js
+ {
+    ordid:'',
+    rprice:1,
+    reason:''
+  }
+```
+
+
+
+#### 3.7.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```json
+{
+    "code": 0,
+    "message": "操作成功",
+    "data":{
+        null
+    }
+}
+```
+
+### 3.8reorderList
+
+#### 3.5.1 基本信息
+
+> 请求路径：/trade/reorderList
+>
+> 请求方式：get
+
+#### 3.2.2 请求参数
+
+| pageNum | Integer | 不空 |
+| ------- | ------- | ---- |
+| bid     | Integer | 可空 |
+| rstate  | Integer | 可空 |
+
+#### 3.2.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```json
+{
+    "code": 0,
+    "message": "操作成功",
+    "data":{
+        item：[
+       {
+    rid:1,
+    ordid:2,
+    rprice:123,
+    rstate:'未通过',
+    reason:'afsa',
+    rtime:'2321-123'  
+ },
+ {
+    rid:1,
+    ordid:2,
+    rprice:123,
+    rstate:'已通过',
+    reason:'afsa',
+    rtime:'2321-123'  
+ },{
+    rid:1,
+    ordid:2,
+    rprice:123,
+    rstate:'待处理',
+    reason:'afsa',
+    rtime:'2321-123'  
+ },],
+    	total:3
+    }
+}
+```
+
+### 
 
 ## 4comment
 
