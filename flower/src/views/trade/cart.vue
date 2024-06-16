@@ -165,6 +165,11 @@ getCartList()
         display: block;
     }
  }
+ img:hover{
+				transform: scale(1.5);/*设置旋转角度和缩放比例*/
+				z-index: 1;/*设置显示优先级别*/
+				transition: 1s;/*设置显示加载时间*/
+			}
 /* 抽屉样式 */
 .avatar-uploader {
  :deep() {

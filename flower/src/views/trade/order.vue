@@ -271,8 +271,7 @@ const addReorder = async () => {
       </textarea>
     </el-col>
     </el-row>
-    
-
+  
     <template #footer>
       <span class="dialog">
         <el-button type="primary" @click="addReorder(); reOrderVisible = false">确定</el-button>

@@ -6,6 +6,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.example.flowerspringboot.pojo.Carts;
 import org.example.flowerspringboot.pojo.Commentstable;
+import org.example.flowerspringboot.pojo.Flowers;
 import org.example.flowerspringboot.pojo.PageBean;
 import org.example.flowerspringboot.service.CommentstableService;
 import org.example.flowerspringboot.mapper.CommentstableMapper;
@@ -28,13 +29,14 @@ public class CommentstableServiceImpl extends ServiceImpl<CommentstableMapper, C
     @Autowired
     private CommentstableMapper commentstableMapper;
     @Override
-    public Result<PageBean<Commentstable>> getComment(Integer pageNum,Integer bid) {
+    public Result<PageBean<Commentstable>> getComment(Integer pageNum,Integer bid,String toSearch) {
         PageBean<Commentstable> pageBean=new PageBean<>();
         PageHelper.startPage(pageNum,4);
         LambdaQueryWrapper<Commentstable> lambdaQueryWrapper=new LambdaQueryWrapper<>();
         if (bid!=null) {
             lambdaQueryWrapper.eq(Commentstable::getBid, ThreadLocalUtil.get());
         }
+
         List<Commentstable> commentstableList=commentstableMapper.selectList(lambdaQueryWrapper);
         pageBean.setItems(commentstableList);
         //通过查询结果的List强转成page

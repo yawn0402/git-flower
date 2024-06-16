@@ -18,8 +18,12 @@
         rstate,reason,rtime
     </sql>
     <select id="myList" resultType="org.example.flowerspringboot.pojo.Reorders">
-        select * from reorders
+        select reorders.* from reorders left join orderstable
+            on reorders.ordid=orderstable.ordid
         <where>
+            <if test="bid!=null">
+                and bid=#{bid}
+            </if>
             <if test="rstate!=null">
                 and rstate=#{rstate}
             </if>

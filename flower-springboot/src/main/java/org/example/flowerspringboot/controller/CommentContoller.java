@@ -23,8 +23,8 @@ public class CommentContoller {
     }
 
     @GetMapping()
-    public Result<PageBean<Commentstable>> getComment(Integer pageNum,Integer bid){
-        return commentstableService.getComment(pageNum,bid);
+    public Result<PageBean<Commentstable>> getComment(Integer pageNum,Integer bid,String toSearch){
+        return commentstableService.getComment(pageNum,bid,toSearch);
     }
     @DeleteMapping()
     public Result<String> commentDelete(@NotNull Integer comid){

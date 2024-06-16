@@ -21,7 +21,7 @@ import{ArrowLeftBold
     },
     {
       pid:2,
-      paddress:''
+      paddress:'https://big-event-ct.oss-cn-beijing.aliyuncs.com/6426fd94-8ad2-4427-91be-eaa17a688cae.png'
       // https://big-event-ct.oss-cn-beijing.aliyuncs.com/6426fd94-8ad2-4427-91be-eaa17a688cae.png
     }
   ])
@@ -40,14 +40,14 @@ import{ArrowLeftBold
       bname:'yawn',
       score:3,
       comments:'hoahoa',
-      time:'2023-2-2'
+     comtime:'2023-2-2'
     },
     {
       comid:2,
       name:'wenxin',
       score:4,
       comments:'下次还来',
-      time:'2024-5-2'
+      comtime:'2024-5-2'
     },
   ])
   const buyerList=ref([{
@@ -96,11 +96,12 @@ import{ArrowLeftBold
 
   for(let i=0;i<flowerComments.value.length;i++){
     let nowCommnet=flowerComments.value[i]
+        nowCommnet.comtime= nowCommnet.comtime.substring(0,10)
     for(let j=0;j<buyerList.value.length;j++){
       if(nowCommnet.bid==buyerList.value[j].bid){
         nowCommnet.bname=buyerList.value[j].bname
       }
-    }
+    } 
   }
 }
   
@@ -145,6 +146,8 @@ import{ArrowLeftBold
             <el-carousel arrow="always">
               <el-carousel-item class="carousel" v-for="item in pics" :key="item.id">
                 <img :src=item.paddress class="image" />
+
+
               </el-carousel-item>
             </el-carousel>
           </el-col>
@@ -176,39 +179,42 @@ import{ArrowLeftBold
                 </tr>
               </table>
               <div class="card-buttons">
-                <el-input-number v-model="selectNum" :min="1" :max="flowerDetail.fnum" @change="handleChange" size="small" />
+                <el-input-number v-model="selectNum" :min="1" :max="flowerDetail.fnum" @change="handleChange"
+                  size="small" />
               </div>
               <div style="margin-top: 10px;">
-                <el-button @click="Cart()" :disabled=buyerStore.buyerInfo.isSeller  type="primary" size="small">加入购物车</el-button>
-                <el-button @click="dialogVisible=true" :disabled=buyerStore.buyerInfo.isSeller type="success" size="small">立即购买</el-button>
+                <el-button @click="Cart()" :disabled=buyerStore.buyerInfo.isSeller type="primary"
+                  size="small">加入购物车</el-button>
+                <el-button @click="dialogVisible=true" :disabled=buyerStore.buyerInfo.isSeller type="success"
+                  size="small">立即购买</el-button>
               </div>
             </el-card>
           </el-col>
 
         </el-row>
-        <el-dialog  title="确认收货信息" v-model="dialogVisible" width="30%" style="background-color: #b3e19d;">
+        <el-dialog title="确认收货信息" v-model="dialogVisible" width="30%" style="background-color: #b3e19d;">
           <div class="dialog">
-                <span>
-                    <label >收货用户:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.bname">
-                </span>
-            </div>      
+            <span>
+              <label>收货用户:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.bname">
+            </span>
+          </div>
           <div class="dialog">
-                    <span>
-                    <label >联系方式:</label><input type="text" disabled  :placeholder="buyerStore.buyerInfo.btele">
-                </span>
-            </div>
-            <div class="dialog">
-                <span>
-                    <label >收货地址:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.baddress">
-                </span>
-            </div>
-                <template #footer>
-                    <span class="dialog">
-                      <el-button @click="dialogVisible = false">取消</el-button>
-                        <el-button @click="Orders();dialogVisible = false">确定</el-button>
-                    </span>
-                </template>
-            </el-dialog>
+            <span>
+              <label>联系方式:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.btele">
+            </span>
+          </div>
+          <div class="dialog">
+            <span>
+              <label>收货地址:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.baddress">
+            </span>
+          </div>
+          <template #footer>
+            <span class="dialog">
+              <el-button @click="dialogVisible = false">取消</el-button>
+              <el-button @click="Orders();dialogVisible = false">确定</el-button>
+            </span>
+          </template>
+        </el-dialog>
       </el-main>
 
     </el-container>
@@ -220,12 +226,11 @@ import{ArrowLeftBold
       <el-table-column label="内容" prop="comments"></el-table-column>
       <el-table-column label="评分">
         <template #default="{ row }">
-          <el-rate v-model="row.score" disabled show-score text-color="#ff9900" 
-          score-template="{row.score} points" />
+          <el-rate v-model="row.score" disabled show-score text-color="#ff9900" score-template="{row.score} points" />
         </template>
 
       </el-table-column>
-      <el-table-column label="评论时间" prop="time"></el-table-column>
+      <el-table-column label="评论时间" prop="comtime"></el-table-column>
     </el-table>
   </el-drawer>
 </template>
@@ -233,6 +238,7 @@ import{ArrowLeftBold
 
 
 <style scoped>
+
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -258,6 +264,7 @@ import{ArrowLeftBold
   width: 100%;
   display: block;
 }
+
 .dialog {
         display: flex;
        margin: 15px;

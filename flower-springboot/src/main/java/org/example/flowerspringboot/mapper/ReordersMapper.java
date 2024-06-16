@@ -13,7 +13,7 @@ import java.util.List;
 * @Entity org.example.flowerspringboot.pojo.Reorders
 */
 public interface ReordersMapper extends BaseMapper<Reorders> {
-    List<Reorders> myList( Integer rstate);
+    List<Reorders> myList( Integer bid,Integer rstate);
 }
 
 

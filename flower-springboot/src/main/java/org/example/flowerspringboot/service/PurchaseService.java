@@ -2,6 +2,7 @@ package org.example.flowerspringboot.service;
 
 import org.example.flowerspringboot.pojo.Purchase;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.utils.Result;
 
 /**
 * @author 陈涛
@@ -10,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface PurchaseService extends IService<Purchase> {
 
+    Result<String> flowerPurchase(Purchase purchase);
 }

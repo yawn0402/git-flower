@@ -12,7 +12,7 @@ import org.example.flowerspringboot.utils.Result;
 */
 public interface CommentstableService extends IService<Commentstable> {
 
-    Result<PageBean<Commentstable>> getComment(Integer pageNum,Integer bid);
+    Result<PageBean<Commentstable>> getComment(Integer pageNum,Integer bid,String toSearch);
 
     Result<String> addComment(Commentstable commentstable);
 

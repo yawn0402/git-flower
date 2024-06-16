@@ -42,41 +42,8 @@ public class ReordersServiceImpl extends ServiceImpl<ReordersMapper, Reorders>
     public Result<PageBean<Reorders>> reorderList(Integer pageNum, Integer bid, Integer rstate) {
             PageBean<Reorders> pageBean=new PageBean<>();
             PageHelper.startPage(pageNum,4);
-            List<Reorders> reordersList=reordersMapper.myList(rstate);
+            List<Reorders> reordersList=reordersMapper.myList(bid,rstate);
             //紧跟着PageHelper.startPage(pageNum,4);这句的会变成page类型
-
-            List<Reorders> allReordersList=reordersMapper.myList(rstate);
-
-
-        if(bid!=null){
-            reordersList.clear();
-            PageHelper.startPage(pageNum,4);
-
-                LambdaQueryWrapper <Orderstable>lambdaQueryWrapper=new LambdaQueryWrapper<>();
-                lambdaQueryWrapper.eq(Orderstable::getBid,bid);
-                List<Orderstable>orderstableList=orderstableMapper.selectList(lambdaQueryWrapper);
-
-                //获取到当前用户的退货信息
-                Iterator<Reorders> riter=allReordersList.iterator();
-                while(riter.hasNext()) {
-                    Reorders reorders=riter.next();
-                    Iterator<Orderstable> oiter=orderstableList.iterator();
-                    while(oiter.hasNext()){
-                        Orderstable orderstable=oiter.next();
-                        if(reorders.getOrdid()==orderstable.getOrdid()){
-                            reordersList.add(reorders);
-                        }
-                    }
-                }
-
-            }
-
-
-        System.out.println("reordersList");
-        System.out.println(reordersList);
-
-
-
             pageBean.setItems(reordersList);
             //通过查询结果的List强转成page
             Page<Reorders> page=( Page<Reorders>)reordersList;

@@ -26,14 +26,14 @@ import{commentListService,commentDelteService,}from"@/api/comment.js"
 import{}from "@/api/trade.js"
 import { ElMessage } from 'element-plus';
 import{useBuyerStore} from'@/stores/index.js'
-
+const toSearch=ref('')
 const buyerStore=useBuyerStore()
 const getCommentList=async()=>{
   let bid=''
   if(!buyerStore.buyerInfo.isSeller){
     bid=buyerStore.buyerInfo.bid
   }
-  const result=await commentListService(pageNum.value,bid)
+  const result=await commentListService(pageNum.value,bid,toSearch.value)
   // console.log(result.data)
   commentsList.value=result.data.items
   total.value=result.data.total
@@ -60,6 +60,7 @@ const getCommentList=async()=>{
   for(let i=0;i<commentsList.value.length;i++){
     commentsList.value[i].comtime=commentsList.value[i].comtime.substring(0,10)
   }
+  toSearch.value=''
 }
 
 getCommentList()

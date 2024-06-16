@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    inventory
+    inventory、进货记录、
 
 </template>
 

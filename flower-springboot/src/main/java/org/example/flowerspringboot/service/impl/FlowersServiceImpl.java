@@ -2,6 +2,8 @@ package org.example.flowerspringboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.example.flowerspringboot.mapper.CommentstableMapper;
 import org.example.flowerspringboot.mapper.PicturesMapper;
 import org.example.flowerspringboot.pojo.*;
@@ -51,6 +53,37 @@ public class FlowersServiceImpl extends ServiceImpl<FlowersMapper, Flowers>
         return Result.success(flowerList);
 
     }
+
+    @Override
+    public Result<PageBean<Flowers>> sallerFlowerList(Integer pageNum, String fname, Integer sid) {
+        PageBean<Flowers> pageBean=new PageBean<>();
+        PageHelper.startPage(pageNum,4);
+        LambdaQueryWrapper<Flowers> lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        if (sid!=null) {
+            lambdaQueryWrapper.eq(Flowers::getSid,sid);
+        }
+        if((!fname.isBlank())&&(!fname.isEmpty())){
+            lambdaQueryWrapper.like(Flowers::getFname,fname);
+        }
+
+        List<Flowers> flowersList=flowersMapper.selectList(lambdaQueryWrapper);
+        pageBean.setItems(flowersList);
+        //通过查询结果的List强转成page
+        Page<Flowers> page=( Page<Flowers>)flowersList;
+        pageBean.setTotal(page.getTotal());
+//        System.out.println(pageBean.getItems());
+        return Result.success(pageBean);
+    }
+
+    @Override
+    public Result<String> flowerDelete(Integer fid) {
+        LambdaQueryWrapper<Flowers>lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Flowers::getFid,fid);
+        flowersMapper.delete(lambdaQueryWrapper);
+        return Result.success();
+    }
+
+
     @Override
     public Result<Flowers> detail(String fid) {
         LambdaQueryWrapper <Flowers>lambdaQueryWrapper=new LambdaQueryWrapper<>();
