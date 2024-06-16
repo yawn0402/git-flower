@@ -27,4 +27,8 @@ public interface FlowersService extends IService<Flowers> {
 
 
     Result<String> flowerDelete(Integer fid);
+
+    Result<String> flowerNew(Flowers flowers);
+
+    Result<String> flowerEdit(Flowers flowers);
 }

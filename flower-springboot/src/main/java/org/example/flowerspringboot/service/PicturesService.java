@@ -2,6 +2,7 @@ package org.example.flowerspringboot.service;
 
 import org.example.flowerspringboot.pojo.Pictures;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.utils.Result;
 
 /**
 * @author 陈涛
@@ -10,4 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface PicturesService extends IService<Pictures> {
 
+    Result<String> picsAdd(Pictures pictures);
+
+    Result<String> picDelete(Integer pid);
 }

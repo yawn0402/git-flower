@@ -1189,6 +1189,104 @@ sname:"ano",
 }
 ```
 
+### 5.8picsList
+
+#### 5.7.1 基本信息
+
+> 请求路径：/saller/flowerEdit
+>
+> 请求方式：put
+
+#### 5.7.2 请求参数
+
+```js
+{
+    fid: '',
+    fname: '',
+    fprice: 1,
+    fnum: 0,
+    fcover: '',
+    sname: '',
+    sid:'',
+    fintroduction: ''
+  }
+```
+
+#### 5.7.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```js
+{
+    "code": 0,
+    "message": "操作成功",
+    "data": null	
+}
+```
+
+### 5.8picsAdd
+
+#### 5.8.1 基本信息
+
+> 请求路径：/saller/picsAdd
+>
+> 请求方式：post
+
+#### 5.8.2 请求参数
+
+| fid  | Integer | 不空 |
+| ---- | ------- | ---- |
+| url  | String  | 不空 |
+
+#### 5.1.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```js
+{
+ "code": 0,
+    "message": "操作成功",
+    "data": null	
+}
+```
+
+### 5.9picsAdd
+
+#### 5.8.1 基本信息
+
+> 请求路径：/saller/picDelete
+>
+> 请求方式：delete
+
+#### 5.8.2 请求参数
+
+| pid  | Integer | 不空 |
+| ---- | ------- | ---- |
+
+#### 5.1.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```js
+{
+ "code": 0,
+    "message": "操作成功",
+    "data": null	
+}
+```
+
 
 
 ## 文件上传

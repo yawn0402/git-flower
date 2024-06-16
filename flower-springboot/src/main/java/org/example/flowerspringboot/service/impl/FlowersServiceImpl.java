@@ -83,6 +83,20 @@ public class FlowersServiceImpl extends ServiceImpl<FlowersMapper, Flowers>
         return Result.success();
     }
 
+    @Override
+    public Result<String> flowerNew(Flowers flowers) {
+        flowersMapper.insert(flowers);
+        return Result.success();
+    }
+
+    @Override
+    public Result<String> flowerEdit(Flowers flowers) {
+        LambdaQueryWrapper<Flowers>lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Flowers::getFid,flowers.getFid());
+        flowersMapper.update(flowers,lambdaQueryWrapper);
+        return Result.success();
+    }
+
 
     @Override
     public Result<Flowers> detail(String fid) {

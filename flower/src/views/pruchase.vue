@@ -71,7 +71,11 @@ import {
   flowerListService,
   suppliersAddService,
   flowerPurchaseService,
-  flowerDeleteService
+  flowerDeleteService,
+  flowerNewService,
+  flowerEditService,
+  picsAddService,
+  picDeleteService
 } from "@/api/saller.js"
 import { ElMessage,ElMessageBox } from 'element-plus';
 // ------------获取初始数据------------
@@ -147,7 +151,7 @@ const purchaseFlower = async () => {
 }
 const deleteFlower = async(fid) => {
   ElMessageBox.confirm(
-    '你确认删除该花卉码？',
+    '你确认删除该花卉吗？',
     '温馨提示',
     {
       confirmButtonText: '确认',
@@ -231,9 +235,10 @@ const getpicsList=()=>{
   for(let i =0;i<pics.value.length;i++){
     picsList.value[i]=pics.value[i].paddress
   }
+  // console.log(picsList.value)
 }
 
-getpicsList()
+
 
 
 const clearFlowerModel=()=>{
@@ -247,6 +252,7 @@ const clearFlowerModel=()=>{
     sid:'',
     fintroduction: ''
   }
+  getflowerListAndSipList()
 }
 
 const flowerNew=async()=>{
@@ -261,22 +267,22 @@ const flowerNew=async()=>{
   else if( flowerModel.value.fintroduction==''){
     ElMessage.error("介绍不能为空哦")
   }else{
-    console.log(flowerModel.value)
+    // console.log(flowerModel.value)
 
-    
+    const result=await flowerNewService(flowerModel.value)
     getflowerListAndSipList()
+    visibleDrawer.value=false
+    clearFlowerModel()
     ElMessage.success("添加成功")
   }
 }
-const flowerEdit=async()=>{
 
-}
 
 
 const coverUploadSuccess = (result) => {
 
 if (result.code === 0) {
-flowerModel.fcover=result.data
+flowerModel.value.fcover=result.data
   ElMessage.success("上传成功")
  
 } else {
@@ -285,16 +291,66 @@ flowerModel.fcover=result.data
 
 
 }
-
-
-const picUploadSuccess = (result) => {
-
-// if (result.code === 0) {
-//   ElMessage.success("上传成功")
+const openFlowerBaseInfo=(fid)=>{
  
-// } else {
-//   ElMessage.error(result.message)
-// }
+  isAddOperate.value=false
+  for(let i=0;i<flowerList.value.length;i++){
+      if(flowerList.value[i].fid==fid){
+        flowerModel.value=flowerList.value[i]
+        break
+      }
+  }
+  visibleDrawer.value=true
+}
+const flowerEdit=async()=>{
+  if(flowerModel.value.fname==''){
+    ElMessage.error("花卉名不能为空哦")
+  }else if(flowerModel.value.sid==''){
+    ElMessage.error("供应商不能为空哦")
+  }
+  // else if(flowerModel.value.fcover==''){
+  //   ElMessage.error("封面不能为空哦")
+  // }
+  else if( flowerModel.value.fintroduction==''){
+    ElMessage.error("介绍不能为空哦")
+  }else{
+    // console.log(flowerModel.value)
+    const result=await flowerEditService(flowerModel.value)
+    getflowerListAndSipList()
+    visibleDrawer.value=false
+    clearFlowerModel()
+    ElMessage.success("添加成功")
+  }
+}
+
+
+import{flowerPicsService}from"@/api/flower.js"
+const getpics=async()=>{
+  const result=await flowerPicsService(flowerModel.value.fid)
+  pics.value=result.data
+  getpicsList()
+}
+
+
+const picUploadSuccess =async (result) => {
+
+
+  // console.log(result.data)
+if (result.code === 0) {
+  const picModel=ref(
+   {
+    fid:flowerModel.value.fid,
+    paddress:result.data
+   } 
+  )
+  const result1=await picsAddService(picModel.value)
+  
+  getpics()
+  ElMessage.success("上传成功")
+ 
+} else {
+  ElMessage.error(result.message)
+}
 
 
 }
@@ -306,6 +362,32 @@ ElMessage.error(result.data.message)
 
 const deletePic = (pid) => {
 
+  ElMessageBox.confirm(
+    '你确认删除该图片吗？',
+    '温馨提示',
+    {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }
+  )
+    .then(async () => {
+      
+      const result = await picDeleteService(pid)
+      getpics()
+      ElMessage({
+        type: 'success',
+        message: '删除成功',
+      })
+    })
+    .catch(() => {
+      //用户点击了取消
+      
+      ElMessage({
+        type: 'info',
+        message: '取消成功',
+      })
+    })
 }
 
 
@@ -313,8 +395,10 @@ const deletePic = (pid) => {
 
 <template>
 
-  <!-- 顶部 -->
+
   <el-card class="page-container ">
+
+  <!-- 顶部 -->
     <template #header>
       <div class="header">
         <div style="display: flex;">
@@ -350,7 +434,7 @@ const deletePic = (pid) => {
       <el-table-column label="操作" width="200">
         <template #default="{ row }">
           <el-button @click="flowerAddDialogVisiable=true;purchaseModel.fid=row.fid;purchaseModel.sname=row.sname" circle plain type="success">补货 </el-button>
-          <el-button @click="visibleDrawer=true;isAddOperate=false" plain type="primary">基本信息</el-button>
+          <el-button @click="openFlowerBaseInfo(row.fid) " plain type="primary">基本信息</el-button>
           <el-button @click="deleteFlower(row.fid)" :icon="Delete" circle plain type="danger"></el-button>
         </template>
       </el-table-column>
@@ -411,7 +495,6 @@ const deletePic = (pid) => {
 
   <!-- 花卉抽屉 -->
   <el-drawer v-model="visibleDrawer" :title="isAddOperate?'新增花卉':'基本信息'" direction="rtl" size="50%">
-    <!-- 添加文章表单 -->
     <el-form  label-width="100px" v-model="flowerModel">
       <el-form-item label="花卉名">
         <el-input v-model="flowerModel.fname"></el-input>
@@ -426,22 +509,15 @@ const deletePic = (pid) => {
         </el-select>
       </el-form-item>
       <el-form-item label="花卉图片" v-else>
-        <el-link style="color: plum;" @click="visiblePicDrawer = true">
+        <el-link style="color: plum;" @click="visiblePicDrawer = true;getpics()">
           点击管理</el-link>
       </el-form-item>
       <el-form-item label="花卉封面">
 
-        <!-- 
-                       auto-upload:设置是否自动上传
-                       action:设置服务器接口路径
-                       name:设置上传的文件字段名
-                       headers:设置上传的请求头
-                       on-success:设置上传成功的回调函数
-                    -->
         <el-upload class="avatar-uploader" :auto-upload="true" :show-file-list="false" action="/api/upload" name="file"
           :headers="{ 'Authorization': tokenStore.token }" :on-success="coverUploadSuccess" :on-error="uploadFail">
-          
-          <el-icon  class="avatar-uploader-icon">
+          <img v-if="flowerModel.fcover" :src="flowerModel.fcover" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon">
             <Plus />
           </el-icon>
         </el-upload>
@@ -487,7 +563,6 @@ const deletePic = (pid) => {
   
    <el-upload class="avatar-uploader" :auto-upload="true" :show-file-list="false" action="/api/upload" name="file"
           :headers="{ 'Authorization': tokenStore.token }" :on-success="picUploadSuccess" :on-error="uploadFail">
-         
           <el-icon  class="avatar-uploader-icon">
             <Plus />
           </el-icon>

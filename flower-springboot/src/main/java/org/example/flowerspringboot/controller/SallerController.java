@@ -2,10 +2,7 @@ package org.example.flowerspringboot.controller;
 
 
 import jakarta.validation.constraints.NotNull;
-import org.example.flowerspringboot.pojo.Flowers;
-import org.example.flowerspringboot.pojo.PageBean;
-import org.example.flowerspringboot.pojo.Purchase;
-import org.example.flowerspringboot.pojo.Suppliers;
+import org.example.flowerspringboot.pojo.*;
 import org.example.flowerspringboot.service.FlowersService;
 import org.example.flowerspringboot.service.PicturesService;
 import org.example.flowerspringboot.service.PurchaseService;
@@ -56,6 +53,26 @@ public class SallerController {
     @DeleteMapping("flowerDelete")
     public Result<String>flowerDelete(@NotNull Integer fid){
             return flowersService.flowerDelete(fid);
+    }
+
+    @PostMapping("flowerNew")
+    public Result<String>flowerNew(@NotNull @RequestBody Flowers flowers){
+        return  flowersService.flowerNew(flowers);
+    }
+
+    @PutMapping("flowerEdit")
+    public Result<String>flowerEdit(@NotNull @RequestBody Flowers flowers){
+        return  flowersService.flowerEdit(flowers);
+    }
+
+    @PostMapping("picsAdd")
+    public Result<String>picsAdd(@NotNull @RequestBody Pictures pictures){
+        return  picturesService.picsAdd(pictures);
+    }
+
+    @DeleteMapping("picDelete")
+    public Result<String>picDelete(@NotNull Integer pid){
+        return picturesService.picDelete(pid);
     }
 
 }
