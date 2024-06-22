@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity org.example.flowerspringboot.pojo.Inventory
 */
 public interface InventoryMapper extends BaseMapper<Inventory> {
+    void toInventory(Integer realNum);
 
 }
 

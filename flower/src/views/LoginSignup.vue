@@ -146,7 +146,7 @@ const login = async () => {
                 <input type="text" placeholder="用户名" v-model="userdata.username">
                 <input type="password" placeholder="密码" v-model="userdata.password">
                 <div class="checkbox">
-                    <input type="checkbox" id="remember" /><label for="remember">记住密码</label>
+                    <!-- <input type="checkbox" id="remember" /><label for="remember">记住密码</label> -->
                 </div>
                 <button class="button submit" @click="login()">登录</button>
                 </form>
@@ -204,7 +204,7 @@ body {
   position: absolute;
   top: -10%;
   left: 5%;
-  background: #eac7cc;
+  background: #95d475;
   width: 320px;
   height: 500px;
   border-radius: 5px;
@@ -272,7 +272,7 @@ p {
 }
 
 span {
-  color: #eac7cc;
+  color: #95d475;
 }
 
 .flower {
@@ -305,7 +305,7 @@ button {
 }
 
 button:hover {
-  background: #eac7cc;
+  background: #95d475;
   color: #f6f6f6;
   transition: background-color 1s ease-out;
 }
@@ -313,8 +313,8 @@ button:hover {
 .button {
   margin-top: 3%;
   background: #f6f6f6;
-  color: #ce7d88;
-  border: solid 1px #eac7cc;
+  color: #95d475;
+  border: solid 1px #95d475;
 }
 
 /* 表单样式 */
@@ -340,7 +340,7 @@ form {
 .sumbit {
   margin-top: 25px;
   padding: 12px;
-  border-color: #ce7d88;
+  border-color: #95d475;
 }
 
 .sumbit:hover {
@@ -349,9 +349,9 @@ form {
 }
 
 input {
-  background: #eac7cc;
+  background: #ffffff;
   width: 65%;
-  color: #ce7d88;
+  color: #95d475;
   border: none;
   border-bottom: 1px solid rgba(246, 246, 246, 0.5);
   padding: 9px;
@@ -359,16 +359,17 @@ input {
 }
 
 input::placeholder {
-  color: #f6f6f6;
+  color: #79bbff;
   letter-spacing: 2px;
   font-size: 1.0em;
   font-weight: 100;
 }
 
 input:focus {
-  color: #ce7d88;
+  color: #eff2ee;
   outline: none;
-  border-bottom: 1.2px solid rgba(206, 125, 136, 0.7);
+  border-bottom: 1.2px solid ;
+  color:#337ecc;
   font-size: 1.0em;
   transition: 0.8s all ease;
 }
@@ -379,7 +380,7 @@ input:focus::placeholder {
 
 label {
   font-family: "Open Sans", sans-serif;
-  color: #ce7d88;
+  color: #95d475;
   font-size: 0.8em;
   letter-spacing: 1px;
 }
@@ -395,11 +396,11 @@ label {
 
 input[type=checkbox] {
   width: 15px;
-  background: #ce7d88;
+  background: #79bbff;
 }
 
 .checkbox input[type=checkbox]:checked + label {
-  color: #ce7d88;
+  color: #79bbff;
   transition: 0.5s all ease;
 }
 </style>

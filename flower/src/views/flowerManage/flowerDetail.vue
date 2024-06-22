@@ -81,7 +81,7 @@ import{ArrowLeftBold
     const result1=await flowerDetailService(flowerStore.selectedFlowerId)
     flowerDetail.value=result1.data
   //  selectNum.value=result1.data.fnum
-
+ // flowerDetail.value.fintroduction=flowerDetail.value.fintroduction.substring(4,flowerDetail.value.fintroduction.length-5)
     
     const result2=await flowerPicsService(flowerStore.selectedFlowerId)
     pics.value=result2.data
@@ -122,10 +122,19 @@ import{ArrowLeftBold
   }
   const Orders=async()=>{
     const result=await addOrderService('',flowerStore.selectedFlowerId,
-    selectNum.value,flowerDetail.value.fprice*selectNum.value)
+    selectNum.value,flowerDetail.value.fprice*selectNum.value,ordtel.value,ordaddress.value)
     ElMessage.success(result.data)
   }
 
+
+
+  const ordtel=ref(buyerStore.buyerInfo.btele)
+  const ordaddress=ref(buyerStore.buyerInfo.baddress)
+  const inputDisabled=ref(true)
+  const getRecinfo=()=>{
+     ordtel.value=buyerStore.buyerInfo.btele
+   ordaddress.value=buyerStore.buyerInfo.baddress
+  }
 </script>
 
 <template>
@@ -193,27 +202,28 @@ import{ArrowLeftBold
 
         </el-row>
         <el-dialog title="确认收货信息" v-model="dialogVisible" width="30%" style="background-color: #b3e19d;">
+           <div class="dialog">
+                <span>
+                    <label >收货用户:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.bname">
+                </span>
+            </div>      
           <div class="dialog">
-            <span>
-              <label>收货用户:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.bname">
-            </span>
-          </div>
-          <div class="dialog">
-            <span>
-              <label>联系方式:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.btele">
-            </span>
-          </div>
-          <div class="dialog">
-            <span>
-              <label>收货地址:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.baddress">
-            </span>
-          </div>
-          <template #footer>
-            <span class="dialog">
-              <el-button @click="dialogVisible = false">取消</el-button>
-              <el-button @click="Orders();dialogVisible = false">确定</el-button>
-            </span>
-          </template>
+                    <span>
+                    <label >联系方式:</label><input type="text" v-model="ordtel" :disabled="inputDisabled" >
+                </span>
+            </div>
+            <div class="dialog">
+                <span>
+                    <label >收货地址:</label><input type="text" v-model="ordaddress" :disabled="inputDisabled">
+                </span>
+            </div>
+                <template #footer>
+                    <span class="dialog">
+                      <el-button @click="dialogVisible = false; inputDisabled = true;getRecinfo()">取消</el-button>
+                      <el-button @click="inputDisabled = false ">修改</el-button>
+                        <el-button @click="Orders();dialogVisible = false">确定</el-button>
+                    </span>
+                </template>
         </el-dialog>
       </el-main>
 

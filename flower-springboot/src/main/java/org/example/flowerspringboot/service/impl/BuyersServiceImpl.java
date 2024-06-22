@@ -81,7 +81,7 @@ public class BuyersServiceImpl extends ServiceImpl<BuyersMapper, Buyers>
     public Result reBaseInfo(Buyers buyers) {
         LambdaQueryWrapper<Buyers>lambdaQueryWrapper=new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(Buyers::getBid,ThreadLocalUtil.get());
-        System.out.println(buyers.getBaddress()+buyers.getBsex());
+//        System.out.println(buyers.getBaddress()+buyers.getBsex());
         buyersMapper.update(buyers,lambdaQueryWrapper);
         return Result.success();
     }

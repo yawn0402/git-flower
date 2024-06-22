@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.flowerspringboot.mapper.LossViewMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.flowerspringboot.pojo.LossView">
+            <result property="fid" column="fid" jdbcType="INTEGER"/>
+            <result property="lsum" column="lsum" jdbcType="DECIMAL"/>
+            <result property="lcount" column="lcount" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        fid,lsum,lcount
+    </sql>
+</mapper>

@@ -19,7 +19,7 @@ export const buyerLoginService=(registerData)=>{
     return request.post("/buyer/login",params);
 }
 //买家信息
-export const buyerInfoService=(registerData)=>{
+export const buyerInfoService=()=>{
     return request.get("/buyer/buyerInfo")
 }
 
@@ -36,10 +36,15 @@ export const userAvatarUpdateService = (avatarUrl)=>{
     return request.patch('/buyer/avatar',params)
 }
 
+
+
 export const buyerReBaseInfoService=(buyerInfo)=>{
     
     return request.put("/buyer/reBaseInfo",buyerInfo)
 }
+
+
+
 export const buyerListService=()=>{
     
     return request.get("/buyer/list")

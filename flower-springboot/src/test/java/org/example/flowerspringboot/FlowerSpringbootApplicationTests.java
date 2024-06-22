@@ -3,6 +3,7 @@ package org.example.flowerspringboot;
 
 import org.example.flowerspringboot.mapper.BuyersMapper;
 import org.example.flowerspringboot.mapper.FlowersMapper;
+import org.example.flowerspringboot.mapper.InventoryMapper;
 import org.example.flowerspringboot.pojo.Buyers;
 import org.example.flowerspringboot.pojo.Flowers;
 import org.example.flowerspringboot.utils.JwtHelper;
@@ -25,6 +26,8 @@ class FlowerSpringbootApplicationTests {
     private BuyersMapper buyersMapper;
     @Autowired
     private FlowersMapper flowersMapper;
+    @Autowired
+    private InventoryMapper inventoryMapper;
 
     @Test
     void contextLoads() {
@@ -44,5 +47,10 @@ class FlowerSpringbootApplicationTests {
     void testToken() {
         JwtHelper jwtHelper = new JwtHelper();
         System.out.println(jwtHelper.createToken(2));
+    }
+
+    @Test
+    void testToInventory() {
+       inventoryMapper.toInventory(20);
     }
 }

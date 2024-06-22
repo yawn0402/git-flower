@@ -39,15 +39,17 @@ public class CartsServiceImpl extends ServiceImpl<CartsMapper, Carts>
     }
 
     @Override
-    public Result<String> addOrder(Integer carid, Integer fid, Integer ordnum, Double ordprice) {
+    public Result<String> addOrder(Integer carid, Integer fid, Integer ordnum, Double ordprice,String ordtel,String ordaddress) {
         Orderstable orderstable=new Orderstable();
         orderstable.setBid(ThreadLocalUtil.get());
-        System.out.println("carid=");
-        System.out.println(carid);
+//        System.out.println("carid=");
+//        System.out.println(carid);
         if(carid==null||carid<1){
             orderstable.setFid(fid);
             orderstable.setOrdnum(ordnum);
             orderstable.setOrdprice(ordprice);
+            orderstable.setOrdtel(ordtel);
+            orderstable.setOrdaddress(ordaddress);
             orderstableMapper.insert(orderstable);
         }else{
             LambdaQueryWrapper <Carts>lambdaQueryWrapper=new LambdaQueryWrapper<>();
@@ -56,6 +58,8 @@ public class CartsServiceImpl extends ServiceImpl<CartsMapper, Carts>
             orderstable.setFid(carts.getFid());
             orderstable.setOrdnum(carts.getCarnum());
             orderstable.setOrdprice(carts.getCarprice());
+            orderstable.setOrdtel(ordtel);
+            orderstable.setOrdaddress(ordaddress);
             orderstableMapper.insert(orderstable);
 
             //从购物车中删除

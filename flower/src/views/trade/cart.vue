@@ -48,7 +48,7 @@ getCartList()
   import { ElMessage,ElMessageBox } from 'element-plus';
   const buyit=async(carid)=>{
     // console.log(carid)
-    const result= await addOrderService(carid,'','','')
+    const result= await addOrderService(carid,'','','',ordtel.value,ordaddress.value)
     getCartList()
     ElMessage.success("购买成功")
   }
@@ -82,6 +82,13 @@ getCartList()
     
   }
   const selectedCarid=ref('')
+  const ordtel=ref(buyerStore.buyerInfo.btele)
+  const ordaddress=ref(buyerStore.buyerInfo.baddress)
+  const inputDisabled=ref(true)
+  const getRecinfo=()=>{
+     ordtel.value=buyerStore.buyerInfo.btele
+   ordaddress.value=buyerStore.buyerInfo.baddress
+  }
 </script>
 
 <template>
@@ -130,17 +137,18 @@ getCartList()
             </div>      
           <div class="dialog">
                     <span>
-                    <label >联系方式:</label><input type="text" disabled  :placeholder="buyerStore.buyerInfo.btele">
+                    <label >联系方式:</label><input type="text" v-model="ordtel" :disabled="inputDisabled" >
                 </span>
             </div>
             <div class="dialog">
                 <span>
-                    <label >收货地址:</label><input type="text" disabled :placeholder="buyerStore.buyerInfo.baddress">
+                    <label >收货地址:</label><input type="text" v-model="ordaddress" :disabled="inputDisabled">
                 </span>
             </div>
                 <template #footer>
                     <span class="dialog">
-                      <el-button @click="dialogVisible = false">取消</el-button>
+                      <el-button @click="dialogVisible = false; inputDisabled = true;getRecinfo()">取消</el-button>
+                      <el-button @click="inputDisabled = false ">修改</el-button>
                         <el-button @click="buyit(selectedCarid);dialogVisible = false">确定</el-button>
                     </span>
                 </template>

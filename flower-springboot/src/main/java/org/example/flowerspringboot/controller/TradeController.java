@@ -32,8 +32,8 @@ public class TradeController {
 
 
     @PostMapping("addOrder")
-    public Result<String>addOrder(Integer carid, Integer fid, Integer ordnum, Double ordprice){
-        return cartsService.addOrder(carid,fid,ordnum,ordprice);
+    public Result<String>addOrder(Integer carid, Integer fid, Integer ordnum, Double ordprice,String ordtel,String ordaddress){
+        return cartsService.addOrder(carid,fid,ordnum,ordprice,ordtel,ordaddress);
     }
 
     @GetMapping("cartList")

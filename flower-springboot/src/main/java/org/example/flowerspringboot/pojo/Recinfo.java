@@ -5,32 +5,21 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * @TableName orderstable
+ * @TableName recinfo
  */
-@TableName(value ="orderstable")
+@TableName(value ="recinfo")
 @Data
-public class Orderstable implements Serializable {
-    private Integer ordid;
+public class Recinfo implements Serializable {
+    private Integer recid;
 
     private Integer bid;
 
-    private Integer fid;
+    private String rectele;
 
-    private Integer ordnum;
-
-    private Double ordprice;
-
-    private Date ctime;
-
-    private Integer ordstate;
-
-    private String ordaddress;
-
-    private String ordtel;
+    private String recaddress;
 
     private static final long serialVersionUID = 1L;
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.flowerspringboot.mapper.RecinfoMapper">
+
+    <resultMap id="BaseResultMap" type="org.example.flowerspringboot.pojo.Recinfo">
+            <id property="recid" column="recid" jdbcType="INTEGER"/>
+            <result property="bid" column="bid" jdbcType="INTEGER"/>
+            <result property="rectele" column="rectele" jdbcType="VARCHAR"/>
+            <result property="recaddress" column="recaddress" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        recid,bid,rectele,
+        recaddress
+    </sql>
+</mapper>

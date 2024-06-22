@@ -89,7 +89,9 @@ const getflowerListAndSipList = async () => {
 
 
   for (let i = 0; i < flowerList.value.length; i++) {
+
     let flower = flowerList.value[i]
+    //flower.fintroduction=flower.fintroduction.substring(4,flower.fintroduction.length-5)
     for (let j = 0; j < suppliersList.value.length; j++) {
       if (flower.sid == suppliersList.value[j].sid) {
         flower.sname = suppliersList.value[j].sname
@@ -268,6 +270,7 @@ const flowerNew=async()=>{
     ElMessage.error("介绍不能为空哦")
   }else{
     // console.log(flowerModel.value)
+    flowerModel.value.fintroduction=flowerModel.value.fintroduction.substring(4,flowerModel.value.fintroduction.length-5)
 
     const result=await flowerNewService(flowerModel.value)
     getflowerListAndSipList()
@@ -315,6 +318,11 @@ const flowerEdit=async()=>{
     ElMessage.error("介绍不能为空哦")
   }else{
     // console.log(flowerModel.value)
+    console.log("之前",flowerModel.value.fintroduction)
+
+
+    flowerModel.value.fintroduction=flowerModel.value.fintroduction.substring(3,flowerModel.value.fintroduction.length-4)
+    
     const result=await flowerEditService(flowerModel.value)
     getflowerListAndSipList()
     visibleDrawer.value=false
@@ -390,6 +398,21 @@ const deletePic = (pid) => {
     })
 }
 
+const toAddFlower=()=>{
+  flowerModel.value={
+    fid: '',
+    fname: '',
+    fprice: 1,
+    fnum: 0,
+    fcover: '',
+    sname: '',
+    sid:'',
+    fintroduction: ''
+  }
+  visibleDrawer.value=true 
+  isAddOperate.value=true
+
+}
 
 </script>
 
@@ -412,7 +435,7 @@ const deletePic = (pid) => {
         </div>
         <div style="display: flex;">
           <el-button type="primary" @click="supplerDialogVisiable = true">添加供应商</el-button>
-          <el-button type="success" @click="visibleDrawer=true ;isAddOperate=true">新进花卉</el-button>
+          <el-button type="success" @click="toAddFlower()">新进花卉</el-button>
         </div>
       </div>
     </template>
@@ -570,8 +593,6 @@ const deletePic = (pid) => {
   
   </el-drawer>
 </template>
-
-
 
 
 <style lang="scss" scoped>

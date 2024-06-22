@@ -2,6 +2,7 @@ package org.example.flowerspringboot.service;
 
 import org.example.flowerspringboot.pojo.Loss;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.utils.Result;
 
 /**
 * @author 陈涛
@@ -10,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface LossService extends IService<Loss> {
 
+    Result<String> loss(Integer fid, Integer lnum);
 }

@@ -619,15 +619,19 @@ https://big-event-gwd.oss-cn-beijing.aliyuncs.com/9bf1cf5b-1420-4c1b-91ad-e0f463
 >
 > 没有carid（在详情页面购买）就是其他的参数。
 
-| carid |      |      |
-| ----- | ---- | ---- |
+| carid      | Integer | 不空 |
+| ---------- | ------- | ---- |
+| ordtel     | String  | 不空 |
+| ordaddress | String  | 不空 |
 
 **或者**
 
-| fid      |      |      |
-| -------- | ---- | ---- |
-| ordnum   |      |      |
-| ordprice |      |      |
+| fid        | Integer | 不空 |
+| ---------- | ------- | ---- |
+| ordnum     | Integer | 不空 |
+| ordprice   | Double  | 不空 |
+| ordtel     | String  | 不空 |
+| ordaddress | String  | 不空 |
 
 #### 3.3.3 响应数据
 
@@ -1286,6 +1290,122 @@ sname:"ano",
     "data": null	
 }
 ```
+
+## 6Inventory
+
+### 6.1inventoryList
+
+#### 6.1.1 基本信息
+
+> 请求路径：/inventory/list
+>
+> 请求方式：get
+
+#### 6.1.2 请求参数
+
+| time | String | 可空 |
+| ---- | ------ | ---- |
+
+#### 6.1.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```json
+[
+    {
+        iid:2,
+        purnum:2,
+        purprice:3,
+        ordnum:3,
+        ordprice:3,
+        reoprice:3,
+        profit:3,
+        itime:234234,
+        realnum:4
+    },
+    {
+        iid:1,
+        purnum:2,
+        purprice:3,
+        ordnum:3,
+        ordprice:3,
+        reoprice:3,
+        profit:3,
+        itime:234234,
+        realnum:4
+    }
+])
+
+```
+
+### 6.2inventoryAdd
+
+#### 6.2.1 基本信息
+
+> 请求路径：/inventory/add
+>
+> 请求方式：post
+
+#### 6.2.2 请求参数
+
+| re'a'l'nu'm | Integer | 不空 |
+| ----------- | ------- | ---- |
+
+#### 6.2.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```js
+{
+ "code": 0,
+    "message": "操作成功",
+    "data": null	
+}
+```
+
+### 6.3lossAdd
+
+#### 6.3.1 基本信息
+
+> 请求路径：/inventory/loss
+>
+> 请求方式：post
+
+#### 6.3.2 请求参数
+
+| fid  | Integer | 不空 |
+| ---- | ------- | ---- |
+| lnum | Integer | 不空 |
+
+#### 6.3.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```js
+{
+ "code": 0,
+    "message": "操作成功",
+    "data": null	
+}
+```
+
+
+
+
+
+
 
 
 

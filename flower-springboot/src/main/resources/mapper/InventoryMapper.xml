@@ -21,4 +21,8 @@
         ordnum,ordprice,reoprice,
         profit,itime,realnum
     </sql>
+
+    <insert id="toInventory">
+        call toinventory(#{realNum})
+    </insert>
 </mapper>

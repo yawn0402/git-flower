@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import{Edit,Delete,ShoppingCartFull} from '@element-plus/icons-vue'
-//文章列表数据模型
 
 const total=ref(20)
 const pageNum=ref(1)

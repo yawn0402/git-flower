@@ -14,7 +14,7 @@ public interface CartsService extends IService<Carts> {
 
     Result<String> addCart(Carts carts);
 
-    Result<String> addOrder(Integer carid, Integer fid, Integer ordnum, Double ordprice);
+    Result<String> addOrder(Integer carid, Integer fid, Integer ordnum, Double ordprice,String ordtel,String ordaddress);
 
     Result<PageBean<Carts>> cartList(Integer pageNum);
 

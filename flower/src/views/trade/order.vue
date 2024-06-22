@@ -11,7 +11,10 @@ const orderList = ref([
     ordnum: 2,
     ordprice: 2,
     ordstate: '未发货',
-    ctime: "2342"
+    ctime: "2342",
+    btele:'12312',
+    baddress:'遥远的地方'
+
   },
   {
     ordid:'1',
@@ -20,7 +23,9 @@ const orderList = ref([
     ordnum: 2,
     ordprice: 2,
     ordstate: '已发货',
-    ctime: "2342"
+    ctime: "2342",
+     ordtel:'12312',
+    ordaddress:'遥远的地方'
   },
   {
     ordid:'1',
@@ -29,7 +34,9 @@ const orderList = ref([
     ordnum: 2,
     ordprice: 2,
     ordstate: '已签收',
-    ctime: "2342"
+    ctime: "2342",
+      ordtel:'12312',
+    ordaddress:'遥远的地方'
   },
   {
     ordid:'1',
@@ -38,7 +45,9 @@ const orderList = ref([
     ordnum: 2,
     ordprice: 2,
     ordstate: '已售后',
-    ctime: "2342"
+    ctime: "2342", 
+    ordtel:'12312',
+    ordaddress:'遥远的地方'
   },
 ])
 const buyerList = ref('')
@@ -73,11 +82,14 @@ const getOrderList = async () => {
     for (let j = 0; j < flowerList.value.length; j++) {
       if (noword.fid == flowerList.value[j].fid) {
         noword.fname = flowerList.value[j].fname
+
       }
     }
     for (let k = 0; k < buyerList.value.length; k++) {
       if (noword.bid == buyerList.value[k].bid) {
         noword.bname = buyerList.value[k].bname
+        // noword.btele=buyerList.value[k].btele
+        // noword.baddress=buyerList.value[k].baddress
       }
     }
   }
@@ -96,6 +108,7 @@ const getOrderList = async () => {
     }
 
   }
+  console.log(orderList.value)
 }
 
 getOrderList()
@@ -181,14 +194,16 @@ const addReorder = async () => {
   </el-form>
   <el-card class="page-container ">
     <el-table class="dataTable" :data="orderList" style="width: 100% ">
-      <el-table-column  label="订单编号" width="100" prop="ordid"></el-table-column>
-      <el-table-column label="用户名" width="150" prop="bname"></el-table-column>
-      <el-table-column label="花卉名" prop="fname"> </el-table-column>
+      <el-table-column  label="订单编号" width="70" prop="ordid"></el-table-column>
+      <el-table-column label="用户名" width="70" prop="bname"></el-table-column>
+      <el-table-column label="花卉名" width="70" prop="fname"> </el-table-column>
 
-      <el-table-column label="数量"  prop="ordnum"></el-table-column>
-      <el-table-column label="总价" prop="ordprice"></el-table-column>
-      <el-table-column label="状态" prop="ordstate"></el-table-column>
-      <el-table-column label="创建时间" width="200" prop="ctime"></el-table-column>
+      <el-table-column label="数量" width="70" prop="ordnum"></el-table-column>
+      <el-table-column label="总价" width="70" prop="ordprice"></el-table-column>
+      <el-table-column label="联系方式" prop="ordtel"></el-table-column>
+      <el-table-column label="地址" prop="ordaddress"></el-table-column>
+      <el-table-column label="状态" width="70" prop="ordstate"></el-table-column>
+      <el-table-column label="创建时间" width="150" prop="ctime"></el-table-column>
       <el-table-column label="操作" width="150" style="align-items: center;">
         <template #default="{ row }">
           <div v-if="!buyerStore.buyerInfo.isSeller">

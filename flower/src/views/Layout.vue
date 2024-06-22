@@ -55,8 +55,9 @@ const dialogVisible=ref(false)
             <div style="display: flex;align-items: center;">
                 <img src="@/assets/logo2.png" alt="">
                 <!-- <img src="https://big-event-ct.oss-cn-beijing.aliyuncs.com/ae9369e9-e773-4f07-a1ed-1973ac0d25f3.png" alt=""> -->
-                <span style="margin-left: 10px; color: #f89898;">
-                    翠微阁
+                <span style="margin-left: 10px;">
+                    <el-text tag="b" style="font-size: x-large;">翠 微 阁</el-text>
+                    
                      <!-- MyGo!!!!! -->
                 </span>
 
@@ -115,7 +116,7 @@ const dialogVisible=ref(false)
 
             
             <span v-if="tokenStore.token==''">
-                <el-link style="color: plum;" @click="router.push('/login');">
+                <el-link style="color: #529b2e; font-size: large;" @click="router.push('/login');">
                 去登陆</el-link>
             </span>
        
@@ -145,7 +146,7 @@ const dialogVisible=ref(false)
         <el-main>
             <router-view>
             </router-view>
-            <el-dialog  title="联系我们" v-model="dialogVisible" width="30%" style="background-color: pink;">
+            <el-dialog  title="联系我们" v-model="dialogVisible" width="30%" style="background-color: #95d475;">
                 <div class="dialog">
                     <span>
                     <label >邮箱:</label><input type="text" disabled placeholder="18273826745">
@@ -158,7 +159,7 @@ const dialogVisible=ref(false)
             </div>
                 <template #footer>
                     <span class="dialog">
-                        <el-button @click="dialogVisible = false">确定</el-button>
+                        <el-button type="success" @click="dialogVisible = false">确定</el-button>
                     </span>
                 </template>
             </el-dialog>
@@ -166,7 +167,7 @@ const dialogVisible=ref(false)
         <el-footer>
             <el-footer>
                 <span>2024.6 Created by 翠微阁，</span>
-                <el-link style="color: plum;" @click="dialogVisible = true">
+                <el-link style="color: #529b2e;" @click="dialogVisible = true">
                     联系我们</el-link>
             </el-footer>
 
