@@ -4,7 +4,7 @@
         Management,Promotion,UserFilled,User,Crop,
         EditPen,SwitchButton,CaretBottom,House,
         ShoppingCart,Memo,List,Star,DataAnalysis,
-        Pointer,Collection
+        Pointer,Collection,Shop,Orange,Van,Failed
     } from '@element-plus/icons-vue'
    
     import {useBuyerStore,useTokenStore} from'@/stores/index.js'
@@ -72,7 +72,7 @@ const dialogVisible=ref(false)
                 <el-menu-item index="/trade/cart" v-show="!buyerStore.buyerInfo.isSeller"><el-icon>
                         <ShoppingCart />
                     </el-icon>购物车</el-menu-item>
-                <el-sub-menu v-if="!buyerStore.buyerInfo.isSeller">
+                <el-sub-menu v-if="!buyerStore.buyerInfo.isSeller" index="1">
                     <template #title><el-icon>
                             <Collection />
                         </el-icon>我的订单</template>
@@ -100,11 +100,28 @@ const dialogVisible=ref(false)
                             <Star />
                         </el-icon>所有评价</el-menu-item>
                 </el-sub-menu>
-                <el-menu-item index="/purchase" v-show="buyerStore.buyerInfo.isSeller">
+
+
+
+                <el-sub-menu v-if="buyerStore.buyerInfo.isSeller" index="2">
+                    <template #title><el-icon><Shop /></el-icon>花卉管理</template>
+                    <el-menu-item index="/purchase"><el-icon><Orange /></el-icon>基本管理
+                    </el-menu-item>
+                    <el-menu-item index="/purchaseHistory"><el-icon>
+                            <Van />
+                        </el-icon>进货记录</el-menu-item>
+                    <el-menu-item index="/lossHistory"><el-icon>
+                            <Failed />
+                        </el-icon>损失记录</el-menu-item>
+                </el-sub-menu>
+                <!-- <el-menu-item index="/purchase" v-show="buyerStore.buyerInfo.isSeller">
                     <el-icon>
                         <Pointer />
-                    </el-icon>花卉管理</el-menu-item>
-                <el-menu-item index="/inventory" v-show="buyerStore.buyerInfo.isSeller"><el-icon>
+                    </el-icon>花卉管理</el-menu-item> -->
+                
+                
+                
+                    <el-menu-item index="/inventory" v-show="buyerStore.buyerInfo.isSeller"><el-icon>
                         <DataAnalysis />
                     </el-icon>盘点</el-menu-item>
                 <el-menu-item @click="buyerStore.buyerInfo.isSeller = !buyerStore.buyerInfo.isSeller;

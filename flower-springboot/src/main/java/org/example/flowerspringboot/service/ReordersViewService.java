@@ -2,6 +2,9 @@ package org.example.flowerspringboot.service;
 
 import org.example.flowerspringboot.pojo.ReordersView;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.utils.Result;
+
+import java.util.List;
 
 /**
 * @author 陈涛
@@ -10,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ReordersViewService extends IService<ReordersView> {
 
+    Result<List<ReordersView>> reordersView();
 }

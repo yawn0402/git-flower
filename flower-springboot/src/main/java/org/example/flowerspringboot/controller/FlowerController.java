@@ -2,11 +2,10 @@ package org.example.flowerspringboot.controller;
 
 
 import jakarta.validation.constraints.NotNull;
-import org.example.flowerspringboot.pojo.Commentstable;
-import org.example.flowerspringboot.pojo.FlowerList;
-import org.example.flowerspringboot.pojo.Flowers;
-import org.example.flowerspringboot.pojo.Pictures;
+import org.example.flowerspringboot.pojo.*;
 import org.example.flowerspringboot.service.FlowersService;
+import org.example.flowerspringboot.service.LossService;
+import org.example.flowerspringboot.service.PurchaseService;
 import org.example.flowerspringboot.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +20,10 @@ import java.util.List;
 public class FlowerController {
     @Autowired
     private FlowersService flowersService;
+    @Autowired
+    private LossService lossService;
+    @Autowired
+    private PurchaseService purchaseService;
 
     @GetMapping("list")
     public Result<FlowerList> getFlowerList(){
@@ -45,6 +48,18 @@ public class FlowerController {
     public Result<List<Commentstable>> comment( @NotNull  Integer fid){
         return flowersService.comment(fid);
     }
+
+    @GetMapping("lossList")
+    public Result<PageBean<Loss>> lossList( Integer fid,@NotNull Integer pageNum){
+        return lossService.lossList(fid,pageNum);
+    }
+
+    @GetMapping("purchaseList")
+    public Result<PageBean<Purchase>> purchaseList( Integer fid,@NotNull Integer pageNum){
+        return purchaseService.purchaseList(fid,pageNum);
+    }
+
+
 }
 
 

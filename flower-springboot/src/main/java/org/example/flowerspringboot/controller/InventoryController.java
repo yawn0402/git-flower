@@ -2,10 +2,8 @@ package org.example.flowerspringboot.controller;
 
 
 import jakarta.validation.constraints.NotNull;
-import org.example.flowerspringboot.pojo.Inventory;
-import org.example.flowerspringboot.pojo.PageBean;
-import org.example.flowerspringboot.service.InventoryService;
-import org.example.flowerspringboot.service.LossService;
+import org.example.flowerspringboot.pojo.*;
+import org.example.flowerspringboot.service.*;
 import org.example.flowerspringboot.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +21,39 @@ public class InventoryController {
     private InventoryService inventoryService;
     @Autowired
     private LossService lossService;
+    @Autowired
+    private LossViewService lossViewService;
+    @Autowired
+    private OrderViewService orderViewService;
+    @Autowired
+    private ReordersViewService reordersViewService;
+    @Autowired
+    private PurchaseViewService purchaseViewService;
+    @Autowired
+    private ScoreViewService scoreViewService;
 
+    @GetMapping("reordersView")
+    public Result<List<ReordersView>>reordersView(){
+        return reordersViewService.reordersView();
+    }
+
+    @GetMapping("orderView")
+    public Result<List<OrderView>>orderView(){
+        return orderViewService.orderView();
+    }
+    @GetMapping("scoreView")
+    public Result<List<ScoreView>>scoreView(){
+        return scoreViewService.scoreView();
+    }
+
+    @GetMapping("purchaseView")
+    public Result<List<PurchaseView>>purchaseView(){
+        return purchaseViewService.purchaseView();
+    }
+    @GetMapping("lossView")
+    public Result<List<LossView>>lossView(){
+        return lossViewService.lossView();
+    }
     @GetMapping("list")
     public Result<PageBean<Inventory>>list(String time,@NotNull Integer pageNum){
         return inventoryService.list(time,pageNum);

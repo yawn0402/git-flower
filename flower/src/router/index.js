@@ -8,6 +8,8 @@ import order from '@/views/trade/order.vue'
 import comment from '../views/trade/comment.vue'
 import inventory from'@/views/inventory.vue'
 import flowerDetail from"@/views/flowerManage/flowerDetail.vue"
+import purchaseHistory from"@/views/flowerManage/purchaseHistory.vue"
+import lossHistory from"@/views/flowerManage/lossHistory.vue"
 import purchase from'@/views/pruchase.vue'
 import LoginSignup from'@/views/LoginSignup.vue'
 import baseInfo from"@/views/buyerManage/baseInfo.vue"
@@ -71,6 +73,14 @@ const routes = [
             {
                 path: '/purchase',
                 component: purchase,
+            },
+            {
+                path: '/purchaseHistory',
+                component: purchaseHistory,
+            },
+            {
+                path: '/lossHistory',
+                component: lossHistory,
             },
         ]
     },

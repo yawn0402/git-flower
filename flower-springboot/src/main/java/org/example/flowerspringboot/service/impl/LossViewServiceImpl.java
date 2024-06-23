@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.example.flowerspringboot.pojo.LossView;
 import org.example.flowerspringboot.service.LossViewService;
 import org.example.flowerspringboot.mapper.LossViewMapper;
+import org.example.flowerspringboot.utils.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author 陈涛
@@ -15,6 +19,13 @@ import org.springframework.stereotype.Service;
 public class LossViewServiceImpl extends ServiceImpl<LossViewMapper, LossView>
     implements LossViewService{
 
+    @Autowired
+   private LossViewMapper lossViewMapper;
+    @Override
+    public Result<List<LossView>> lossView() {
+        List<LossView>lossViews=lossViewMapper.selectList(null);
+        return Result.success(lossViews);
+    }
 }
 
 

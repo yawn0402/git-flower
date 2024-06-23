@@ -1401,11 +1401,53 @@ sname:"ano",
 }
 ```
 
+### 6.4lossView
 
+#### 6.4.1 基本信息
 
+> 请求路径：/inventory/lossView
+>
+> 请求方式：get
 
+#### 6.4.2 请求参数
 
+无
 
+#### 6.4.3 响应数据
+
+响应数据类型：application/json
+
+响应参数说明：
+
+响应数据样例：
+
+```json
+[
+    {
+        fid:1,
+        fname:'f1',
+        lsum:29,
+        lcount:2,
+    },
+   {
+        fid:1,
+        fname:'f1',
+        lsum:29,
+        lcount:2,
+    },
+])
+
+```
+
+### 6.5scoreView
+
+### 6.6orderView
+
+### 6.7purchaseView
+
+### 6.8reordesView
+
+这四个同6.4lossView几乎一样，除了路径和返回数据。我就不想多写了。
 
 
 

@@ -1,8 +1,12 @@
 package org.example.flowerspringboot.service;
 
+import jakarta.validation.constraints.NotNull;
 import org.example.flowerspringboot.pojo.Loss;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.flowerspringboot.pojo.PageBean;
 import org.example.flowerspringboot.utils.Result;
+
+import java.util.List;
 
 /**
 * @author 陈涛
@@ -12,4 +16,6 @@ import org.example.flowerspringboot.utils.Result;
 public interface LossService extends IService<Loss> {
 
     Result<String> loss(Integer fid, Integer lnum);
+
+    Result<PageBean<Loss>> lossList(Integer fid, @NotNull Integer pageNum);
 }

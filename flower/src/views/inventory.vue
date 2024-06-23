@@ -16,6 +16,12 @@ import{inventoryListService,
     inventoryAddService,
     inventoryAllListService,
     lossAddService,
+    lossViewListService,
+    orderViewListService,
+    purchaseViewListService,
+    reordesViewListService,
+    scoreViewListService,
+
 
 
 }from '@/api/inventory.js'
@@ -97,6 +103,75 @@ const inventoryList=ref([
 ])
 
 
+
+// ---------------------
+// 新增盘点
+const realnum=ref(1)
+const inventoryDialogVisiable=ref(false)
+
+inventoryAddService
+const inventoryAdd=async()=>{
+
+    ElMessageBox.confirm(
+            `你确认在库花卉数为  ${realnum.value} 支吗`,
+            '温馨提示',
+            {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'warning',
+            }
+        )
+            .then(async () => {
+                const result=await inventoryAddService(realnum.value)
+                // console.log( realnum.value)
+                ElMessage.success("盘点成功")
+                getinventoryAllList()
+                realnum.value=1
+            })
+            .catch(() => {
+                //用户点击了取消
+                ElMessage({
+                    type: 'info',
+                    message: '取消退出',
+                })
+            })
+   
+
+}
+
+// ---------------------
+// 统计损失
+const seletedFlowerId=ref('')
+const lossNum=ref(1)
+const lossDialogVisiable=ref(false)
+const flowerList = ref([
+  {
+    fid: 1,
+    fname: 'f1',
+  
+  },
+  {
+    fid: 2,
+    fname: 'f2',
+  
+  },
+
+])
+
+const getflowerList=async()=>{
+    const result =await flowerListService()
+    flowerList.value=result.data.items
+    // console.log(result.data)
+}
+getflowerList()
+
+const addLoss=async()=>{
+    const result =await lossAddService(seletedFlowerId.value,lossNum.value)
+    ElMessage.success("统计成功")
+}
+
+// ---------------------
+// 5个抽屉
 const lossViewList=ref([
     {
         fid:1,
@@ -149,76 +224,6 @@ const scoreViewList=ref([
    
 ])
 
-// ---------------------
-// 新增盘点
-const realnum=ref(1)
-const inventoryDialogVisiable=ref(false)
-
-inventoryAddService
-const inventoryAdd=async()=>{
-
-    ElMessageBox.confirm(
-            `你确认在库花卉数为  ${realnum.value} 支吗`,
-            '温馨提示',
-            {
-                confirmButtonText: '确认',
-                cancelButtonText: '取消',
-                type: 'warning',
-            }
-        )
-            .then(async () => {
-                const result=await inventoryAddService(realnum.value)
-                // console.log( realnum.value)
-                ElMessage.success("盘点成功")
-                getinventoryAllList()
-                realnum.value=1
-            })
-            .catch(() => {
-                //用户点击了取消
-                ElMessage({
-                    type: 'info',
-                    message: '取消退出',
-                })
-            })
-   
-
-}
-
-
-
-// ---------------------
-// 统计损失
-const seletedFlowerId=ref('')
-const lossNum=ref(1)
-const lossDialogVisiable=ref(false)
-const flowerList = ref([
-  {
-    fid: 1,
-    fname: 'f1',
-  
-  },
-  {
-    fid: 2,
-    fname: 'f2',
-  
-  },
-
-])
-
-const getflowerList=async()=>{
-    const result =await flowerListService()
-    flowerList.value=result.data.items
-    console.log(result.data)
-}
-getflowerList()
-
-const addLoss=async()=>{
-    const result =await lossAddService(seletedFlowerId.value,lossNum.value)
-    ElMessage.success("统计成功")
-}
-
-// ---------------------
-// 5个抽屉
 const visibleDrawer1=ref(false)
 const visibleDrawer4=ref(false)
 const visibleDrawer5=ref(false)
@@ -241,6 +246,91 @@ const showInventory=()=>{
     }
 }
 
+const getViews=async()=>{
+    const result1=await lossViewListService()
+    lossViewList.value=result1.data
+    const result2=await orderViewListService()
+    orderViewList.value=result2.data
+
+    const result3=await purchaseViewListService()
+    purchaseViewList.value=result3.data
+
+    const result4=await reordesViewListService()
+    reordesViewList.value=result4.data
+
+    const result5=await scoreViewListService()
+    scoreViewList.value=result5.data
+
+    //整合花卉名和封面
+    // console.log( scoreViewList.value)
+    
+    for(let i=0;i< lossViewList.value.length;i++){
+        let now= lossViewList.value[i]
+        
+        for(let j=0;j<flowerList.value.length;j++){
+            let flower=flowerList.value[j]
+            if(now.fid==flower.fid){
+                now.fname=flower.fname
+                now.fcover=flower.fcover
+            }
+        }
+        
+    }
+
+    for(let i=0;i< orderViewList.value.length;i++){
+        let now= orderViewList.value[i]
+        now.totalprice=now.totalprice.toFixed(2)
+        for(let j=0;j<flowerList.value.length;j++){
+            let flower=flowerList.value[j]
+            if(now.fid==flower.fid){
+                now.fname=flower.fname
+                now.fcover=flower.fcover
+            }
+        }
+        
+    }
+
+    for(let i=0;i< purchaseViewList.value.length;i++){
+        let now= purchaseViewList.value[i]
+        now.totalprice=now.totalprice.toFixed(2)
+        for(let j=0;j<flowerList.value.length;j++){
+            let flower=flowerList.value[j]
+            if(now.fid==flower.fid){
+                now.fname=flower.fname
+                now.fcover=flower.fcover
+            }
+        }
+        
+    }
+    for(let i=0;i< reordesViewList.value.length;i++){
+        let now= reordesViewList.value[i]
+        now.totalprice=now.totalprice.toFixed(2)
+        for(let j=0;j<flowerList.value.length;j++){
+            let flower=flowerList.value[j]
+            if(now.fid==flower.fid){
+                now.fname=flower.fname
+                now.fcover=flower.fcover
+            }
+        }
+        
+    }
+
+    for(let i=0;i< scoreViewList.value.length;i++){
+        let now= scoreViewList.value[i]
+        now.avgscore=now.totalscore/now.records
+        for(let j=0;j<flowerList.value.length;j++){
+            let flower=flowerList.value[j]
+            if(now.fid==flower.fid){
+                now.fname=flower.fname
+                now.fcover=flower.fcover
+            }
+        }
+        
+    }
+    
+
+}
+getViews()
 
 </script>
 
@@ -397,12 +487,20 @@ const showInventory=()=>{
   </el-dialog>
 
   <!-- 1抽屉 -->
-  <el-drawer v-model="visibleDrawer1" :title="'损失盘点'" direction="rtl" size="50%">
+  <el-drawer v-model="visibleDrawer1" :title="'损失盘点'" direction="rtl" size="60%">
     <el-table class="dataTable" :data="lossViewList" style="width: 100% ">
-            <el-table-column label="编号"  prop="fid"></el-table-column>
-            <el-table-column label="花卉名"  prop="fname"></el-table-column>
-            <el-table-column label="总数(支)"  prop="lcount"></el-table-column>
-            <el-table-column label="金额(元)"  prop="lsum"> </el-table-column>
+            <el-table-column label="编号"  prop="fid"  width="100px"></el-table-column>
+            <el-table-column label="花卉名"  prop="fname" width="100px"></el-table-column>
+            <el-table-column label="图片" >
+        <template #default="{ row }" >
+        <img 
+          :src=row.fcover
+          class="image"
+        />
+        </template>
+     </el-table-column>
+            <!-- <el-table-column label="总数(支)"  prop="lcount"></el-table-column> -->
+            <el-table-column label="总数(支)"  prop="lsum"> </el-table-column>
            
             <template #empty>
                 <el-empty description="没有数据" />
@@ -413,10 +511,18 @@ const showInventory=()=>{
 
 
   <!-- 23抽屉 -->
-  <el-drawer v-model="visibleDrawer23" :title="seletedInventory==2?'订单盘点':'进货盘点'" direction="rtl" size="50%">
+  <el-drawer v-model="visibleDrawer23" :title="seletedInventory==2?'订单盘点':'进货盘点'" direction="rtl" size="60%">
     <el-table class="dataTable" :data="seletedInventory==2?orderViewList:purchaseViewList" style="width: 100% ">
             <el-table-column label="编号"  prop="fid"></el-table-column>
             <el-table-column label="花卉名"  prop="fname"></el-table-column>
+            <el-table-column label="图片" width="100px" >
+        <template #default="{ row }" >
+        <img 
+          :src=row.fcover
+          class="image"
+        />
+        </template>
+     </el-table-column>
             <el-table-column label="总数(支)"  prop="totalnum"></el-table-column>
             <el-table-column label="金额(元)"  prop="totalprice"> </el-table-column>
            
@@ -428,10 +534,18 @@ const showInventory=()=>{
   </el-drawer>
 
     <!-- 4抽屉 -->
-    <el-drawer v-model="visibleDrawer4" :title="'售后盘点'" direction="rtl" size="50%">
+    <el-drawer v-model="visibleDrawer4" :title="'售后盘点'" direction="rtl" size="60%">
     <el-table class="dataTable" :data="reordesViewList" style="width: 100% ">
             <el-table-column label="编号"  prop="fid"></el-table-column>
             <el-table-column label="花卉名"  prop="fname"></el-table-column>
+            <el-table-column label="图片" width="100px" >
+        <template #default="{ row }" >
+        <img 
+          :src=row.fcover
+          class="image"
+        />
+        </template>
+     </el-table-column>
             <el-table-column label="总数(支)"  prop="recount"></el-table-column>
             <el-table-column label="金额(元)"  prop="totalprice"> </el-table-column>
            
@@ -444,10 +558,18 @@ const showInventory=()=>{
 
 
  <!-- 5抽屉 -->
- <el-drawer v-model="visibleDrawer5" :title="'评论盘点'" direction="rtl" size="50%">
+ <el-drawer v-model="visibleDrawer5" :title="'评论盘点'" direction="rtl" size="60%">
     <el-table class="dataTable" :data="scoreViewList" style="width: 100% ">
             <el-table-column label="编号"  prop="fid"></el-table-column>
             <el-table-column label="花卉名"  prop="fname"></el-table-column>
+            <el-table-column label="图片" width="100px" >
+        <template #default="{ row }" >
+        <img 
+          :src=row.fcover
+          class="image"
+        />
+        </template>
+     </el-table-column>
             <el-table-column label="平均评分"  prop="avgscore"></el-table-column>
             <el-table-column label="评论数"  prop="records"> </el-table-column>
            
@@ -492,4 +614,10 @@ const showInventory=()=>{
 .el-row {
   margin-bottom: 20px;
 }
+
+.image {
+        width: 70px;
+        display: block;
+    }
+ 
 </style>
